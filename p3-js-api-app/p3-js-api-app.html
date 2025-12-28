@@ -10,8 +10,9 @@
 </head>
 
 <body>
-    <header>Typing Game
-        
+    <header>
+        <h1>Type Trainer</h1>
+        <div id="username-header-display"></div>
     </header>
 
     <section id="username-section" class="hidden">
@@ -31,15 +32,16 @@
    
     <section id="game-section" class="hidden">
 
-    <div class="timer" id="timer">Timer: 0</div>
-    <div class="score" id="score">Score: </div>
+    <div class="timer" id="timer">Timer</div>
+    <div class="score" id="score">Score</div>
     <div class="container">
         <div class="word" id="word">Quote</div>
         <input id="word-input" class="word-input" autofocus></input>
     </div>
+    <button id="pause-btn">Pause</button>
     </section>
 
-    <section id="leaderboard-screen" class="hidden">Leaderboard
+    <section id="leaderboard-screen" class="hidden">
     <h2> Leaderboard </h2>
     <ul id="leaderboard-list"></ul>
     </section>

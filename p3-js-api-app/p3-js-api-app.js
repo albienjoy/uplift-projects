@@ -6,20 +6,20 @@ const model = "command-a-03-2025";
 const difficultyPrompts = {
   easy: `
 Kindergarten to grade 3 vocabulary.
-4 to 5 letters only.
+Words must have 4 to 5 letters only.
 Simple, concrete nouns or verbs.
 No plurals.
 No proper nouns.
   `,
   medium: `
 Grade 3 to grade 6 vocabulary.
-4 to 7 letters.
+Words must have 4 to 7 letters.
 Common but varied words.
 No slang.
   `,
   hard: `
 High school to college level vocabulary.
-4 to 9 letters.
+Words must have 4 to 9 letters.
 May include hyphenated words.
 May include jargon or advanced terms.
 Avoid extremely common words.
@@ -50,13 +50,15 @@ const gameScreen = document.getElementById("game-section");
 
 const usernameInput = document.getElementById("username-input");
 const usernameBtn = document.getElementById("username-btn");
+const usernameHeaderDisplay = document.getElementById("username-header-display");
 const savedUsername = localStorage.getItem("username");
 const savedDifficulty = localStorage.getItem("difficulty")
 
 const timeDisplay = document.getElementById("timer");
 const scoreDisplay = document.getElementById("score");
 const wordDisplay = document.getElementById("word");
-const wordInput = document.getElementById("word-input")
+const wordInput = document.getElementById("word-input");
+const pauseBtn = document.getElementById("pause-btn");
 
 /* the brain of my game */
 const gameState = {
@@ -66,6 +68,7 @@ const gameState = {
     score: 0,
     currentWord: "",
     isPlaying: false,
+    isPaused: false,
 };
 
 const leaderboardScreen = document.getElementById("leaderboard-screen");
@@ -86,9 +89,8 @@ const leaderboardList = document.getElementById("leaderboard-list")
 //         console.log("else if")
 // } else {
 //     gameScreen.classList.add("hidden");
-//     usernameScreen.classList.remove("hidden");
+usernameScreen.classList.remove("hidden");
 // }    console.log("if2")
-
 
     usernameBtn.addEventListener("click", () => {
     const username = usernameInput.value.trim();
@@ -98,12 +100,12 @@ const leaderboardList = document.getElementById("leaderboard-list")
     };
 
     localStorage.setItem("username", username);
+
+    usernameHeaderDisplay.append(username)
     usernameScreen.classList.add("hidden");
     difficultyScreen.classList.remove("hidden");
     leaderboardScreen.classList.add("hidden");
 })
-
-/* Difficulty screen */
 
 difficultyScreen.addEventListener("click", (event) => { /* putting the code in the diffulcty screen helps with event delegation */
 console.log("Clicked difficulty:", event.target.dataset.level);
@@ -235,34 +237,35 @@ async function showNewWord() {
 
 wordInput.addEventListener("input", () => {
     if (!gameState.isPlaying) return;
-console.log(gameState.isPlaying)
     if (wordInput.value === gameState.currentWord) {
-console.log(gameState.currentWord)
-
         handleCorrectword();
     };
 })
 
 function handleCorrectword() {
     const multiplier = difficultySettings[gameState.difficulty].multiplier;
-
     gameState.score += 1 * multiplier;
-
     scoreDisplay.textContent = gameState.score;
 
     showNewWord();
 }
 
 function startTimer() {
-    const timer = setInterval(() => {
+    timerId = setInterval(() => {
+        if (gameState.isPaused) return;
+        updateUI();
+
         if (gameState.timeLeft <= 0) {
-        clearInterval(timer);
-        endGame();
-        return;
-    }
-    gameState.timeLeft--;
-    timeDisplay.textContent = gameState.timeLeft;
+            clearInterval(timerId);
+            timerId = null;
+            endGame();
+            return;
+        }
+
+        gameState.timeLeft--;
+        updateUI();
 }, 1000);
+
 }
 
 function updateUI() {
@@ -270,49 +273,86 @@ function updateUI() {
     scoreDisplay.textContent = gameState.score;
 }
 
+pauseBtn.addEventListener("click", (event) => {
+ if (!gameState.isPlaying) return;
+
+ gameState.isPaused = !gameState.isPaused;
+
+ if (gameState.isPaused) {
+    pauseGame();
+ } else {
+    resumeGame();
+ }
+})
+
+function pauseGame() {
+    wordInput.disabled = true;
+    pauseBtn.textContent = "Resume"
+}
+
+function resumeGame() {
+    wordInput.disabled = false;
+    wordInput.focus();
+    pauseBtn.textContent = "Pause";
+}
+
 function endGame() {
   gameState.isPlaying = false;
   wordInput.disabled = true;
 
   saveScore();
-  showLeaderboard();
+  renderLeaderboard();
 }
 
 function saveScore() {
     const leaderboard = 
     JSON.parse(localStorage.getItem("leaderboard")) || [];
-console.log(gameState.username)
-console.log(gameState.score)
 
     const username = localStorage.getItem("username");
-console.log("username", username)
-console.log("leaderboard1", leaderboard)
 
     leaderboard.push({
         username: username,
         score: gameState.score
     });
-console.log("leaderboard2", leaderboard)
-
-    leaderboard.sort((a,b) => b.score - a.score);
 
     localStorage.setItem("leaderboard", JSON.stringify(leaderboard))
 }
 
-function showLeaderboard() {
+function getTopScore() {
     const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
 
+    return leaderboard
+    .sort((a,b) => b.score - a.score)
+    .slice(0, 10)
+}
+
+function renderLeaderboard() {
+    const topScores = getTopScore();
     leaderboardList.innerHTML = "";
 
-    leaderboard.forEach(entry => {
+    topScores.forEach((entry, index) => {
         const li = document.createElement("li");
-        li.textContent = `${entry.username}: ${entry.score}`;
+        li.textContent = `${index + 1} ${entry.username} - ${entry.score}`;
         leaderboardList.appendChild(li);
     });
 
-    gameScreen.classList.add("hidden");
+        gameScreen.classList.add("hidden");
     leaderboardScreen.classList.remove("hidden");
 }
-// const getNextQuote = async () => {
-//     const quote = await getRandomQuote();
+
+// function showLeaderboard() {
+//     const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+
+//     const top10 = leaderboard.slice(0,10)
+//     console.log("showleaderboard", leaderboard)
+//     top10.innerHTML = "";
+
+//     top10.forEach(entry => {
+//         const li = document.createElement("li");
+//         li.textContent = `${entry.username}: ${entry.score}`;
+//         top10.appendChild(li);
+//     });
+
+//     gameScreen.classList.add("hidden");
+//     leaderboardScreen.classList.remove("hidden");
 // }
