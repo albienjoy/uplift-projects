@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Type!</title>
+
+    <link rel="stylesheet" href="p3-js-api-app.css">
+    <script src="p3-js-api-app.js" defer></script>
+</head>
+
+<body>
+    <header>Typing Game
+        
+    </header>
+
+    <section id="username-section" class="hidden">
+    <h2> Enter your username </h2>
+    <input id="username-input" type="text" placeholder="Type your username">
+    <button id="username-btn">Continue</button>
+    </section>
+    
+    <br>
+
+    <section id="difficulty-section" class="hidden">
+    <h2> Select difficulty </h2>
+    <button data-level="easy">Easy</button>
+    <button data-level="medium">Medium</button>
+    <button data-level="hard">Hard</button>
+    </section>
+   
+    <section id="game-section" class="hidden">
+
+    <div class="timer" id="timer">Timer: 0</div>
+    <div class="score" id="score">Score: </div>
+    <div class="container">
+        <div class="word" id="word">Quote</div>
+        <input id="word-input" class="word-input" autofocus></input>
+    </div>
+    </section>
+
+    <section id="leaderboard-screen" class="hidden">Leaderboard
+    <h2> Leaderboard </h2>
+    <ul id="leaderboard-list"></ul>
+    </section>
+
+</body>
+</html>
