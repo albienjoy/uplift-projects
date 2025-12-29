@@ -27,6 +27,10 @@
         <img src="logo.png" alt="logo showing a keyboard key">
         </div>
 
+        <div class="mechanics">
+            Mechanics
+        </div>
+
         <div class="username-elements">
         <img src="username.png" alt="line art of a person">
         <div id="username-header-display">maria gondola bebe gurl</div>
@@ -48,30 +52,46 @@
     <br>
 
     <section id="difficulty-section" class="hidden difficulty-section">
-    <h2> Select difficulty </h2>
-    <button data-level="easy" class="difficulty-button">
-            <span class="front-btn">Easy</span>
-    </button>
-    <button data-level="medium" class="difficulty-button">Medium</button>
-    <button data-level="hard" class="difficulty-button">Hard</button>
+        <h2> Select difficulty </h2>
+            <button class="difficulty-button push-btn" id="easy-push">
+                    <span class="front-btn" id="easy-front" data-level="easy">Easy</span>
+            </button>
+
+            <button class="difficulty-button push-btn" id="medium-push">
+                <span class="front-btn" id="medium-front" data-level="medium">Medium</span>
+            </button>
+
+            <button class="difficulty-button push-btn" id="hard-push">
+                <span class="front-btn" id="hard-front" data-level="hard">Hard</span>
+            </button>
     </section>
    
     <section id="game-section" class="hidden game-section">
+        <div class="stats-container">
+            <div id="timer-label">Timer</div>
+            <div id="score-label">Score</div>
+            
+            <div id="timer">T 0</div>
+            <div id="score">S 0</div>
+        </div>
 
-    <div class="timer" id="timer">Timer</div>
-    <div class="score" id="score">Score</div>
-    <div class="container">
-        <div class="word" id="word">Quote</div>
-        <input id="word-input" class="word-input" autofocus></input>
-    </div>
-    <button id="pause-btn">Pause</button>
+        <div class="typing-container">
+            <div id="word">Quote</div> 
+            <input id="word-input" placeholder="Sprint!" autofocus></input>
+        </div>
+        <button id="pause-btn" class="push-btn">
+            <span class="front-btn">Pause</span>
+        </button>
     </section>
 
     <section id="leaderboard-screen" class="hidden leaderboard-section">
-    <h2> Leaderboard </h2>
-    <ul id="leaderboard-list"></ul>
-    <button id="restart">Play again</button>
+        <h2> Leaderboard </h2>
+            <ul id="leaderboard-list"></ul>
+            <button id="restart" class="push-btn">
+                <span class="front-btn">Play again</span>
+            </button>
     </section>
+
 
 </body>
 </html>

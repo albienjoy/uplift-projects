@@ -25,7 +25,6 @@ img {
 }
 
 h2 {
-    /* color:#fff1ba; */
     font-size: 2rem;
     font-weight: normal;
 }
@@ -76,7 +75,7 @@ header {
     overflow: hidden;
     width: 0ch;
     
-    background: linear-gradient(to right, #bde87f, #cb3177);
+    background: linear-gradient(to right, #56c1ff, #bde87f, #f14894);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -142,58 +141,102 @@ header {
 .push-btn:active .front-btn {
     transform: translateY(-2px);
 }
-/*game screen*/
 
-.container {
+/*difficulty section */
+.difficulty-button {
+    display: block;
+    margin-bottom: 1.5rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#easy-push {
+    background: #776729;
+    width: 20rem;
+}
+
+#easy-front {
+    background: #ffde59;
+}
+
+#medium-push {
+    background: #21648a;
+        width: 20rem;
+}
+
+#medium-front {
+    background: #38b6ff;
+}
+
+#hard-push {
+    background: #712648;
+        width: 20rem;
+}
+
+#hard-front {
+    background: #f14894;
+}
+
+
+/*game screen*/
+.game-section {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.stats-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 50%;
+    margin: auto;
+    margin-bottom: 2rem;
+}
+
+.typing-container {
     background-color: palegoldenrod;
     padding: 1rem;
     border-radius: .5rem;
     width: 700px;
     max-width: 90%;
-}
-
-.timer {
-    /* position: absolute;
-    top: 2rem;
-    font-size: 3rem; */
-    color: palegoldenrod;
-    font-weight: bold
-}
-
-.username-section {
-    display: flexbox;
-    font-size: 12px;
-    justify-content: center;
-    align-items: center;
-}
-
-.score {
-    /* position: absolute;
-    top: 5rem;
-    font-size: 3rem; */
-    color: palegoldenrod;
-    font-weight: bold
-}
-
-.word {
+    margin: auto;
     margin-bottom: 2rem;
-    margin-left: calc(1rem + 2px);
-    margin-right: calc(1rem + 2px);
 }
 
-.word-input {
+#timer, #score {
+    font-size: 3rem;
+    font-weight: bold
+}
+
+#timer-label, #timer {
+    font-size: 2rem;
+    color:#38b6ff;
+}
+
+#score-label, #score {
+    font-size: 2rem;
+    color: #bde87f;
+}
+
+#word {
+    padding: 1.5rem;
+    font-size: 2rem;
+    margin: auto;
+}
+
+#word-input {
+    font-size: 2rem;
     background-color: transparent;
     border: 2px solid black;
     outline: none;
     width: 100%;
-    height: 20rem;
-    margin: auto;
+    height: 4rem;
+    text-align: center;
     resize: none;
-    padding: .5rem 1rem;
     overflow: hidden;/*hides scrollbar*/
-    font-size: 1rem;
+    color: black
 }
 
-.word-input:focus {
+#word-input:focus {
     border-color: rgb(90, 40, 182);
 }

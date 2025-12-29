@@ -88,6 +88,7 @@ leaderboardScreen.classList.remove("hidden");
     const username = usernameInput.value.trim();
     if (username === "") {
         alert("Please enter a username");
+            usernameScreen.classList.remove("hidden");
     };
 
     localStorage.setItem("username", username);
