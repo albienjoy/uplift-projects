@@ -3,34 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Type!</title>
+    <title>Key Sprint</title>
+    <link rel="icon" type="image/x-icon" href="logo.png">
 
     <link rel="stylesheet" href="p3-js-api-app.css">
     <script src="p3-js-api-app.js" defer></script>
+
+    /*work sans*/
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Capriola&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    /* roboto mono */
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
     <header>
-        <h1>Type Trainer</h1>
-        <div id="username-header-display"></div>
+        <div class="logo-elements">
+        <img src="logo.png" alt="logo showing a keyboard key">
+        </div>
+
+        <div class="username-elements">
+        <img src="username.png" alt="line art of a person">
+        <div id="username-header-display">maria gondola bebe gurl</div>
+        </div>
     </header>
 
-    <section id="username-section" class="hidden">
-    <h2> Enter your username </h2>
-    <input id="username-input" type="text" placeholder="Type your username">
-    <button id="username-btn">Continue</button>
+    <section id="username-section" class="hidden username-section">
+        <div class="title-container">
+            <span class="title-effect">Key Sprint</span>
+        </div>
+        
+        <h2> Enter your username to start</h2>
+        <input id="username-input" type="text" placeholder="Username" autofocus>
+        <br><button id="username-btn" class="push-btn">
+            <span class="front-btn">Continue</span>
+        </button>
     </section>
     
     <br>
 
-    <section id="difficulty-section" class="hidden">
+    <section id="difficulty-section" class="hidden difficulty-section">
     <h2> Select difficulty </h2>
-    <button data-level="easy">Easy</button>
-    <button data-level="medium">Medium</button>
-    <button data-level="hard">Hard</button>
+    <button data-level="easy" class="difficulty-button">
+            <span class="front-btn">Easy</span>
+    </button>
+    <button data-level="medium" class="difficulty-button">Medium</button>
+    <button data-level="hard" class="difficulty-button">Hard</button>
     </section>
    
-    <section id="game-section" class="hidden">
+    <section id="game-section" class="hidden game-section">
 
     <div class="timer" id="timer">Timer</div>
     <div class="score" id="score">Score</div>
@@ -41,9 +67,10 @@
     <button id="pause-btn">Pause</button>
     </section>
 
-    <section id="leaderboard-screen" class="hidden">
+    <section id="leaderboard-screen" class="hidden leaderboard-section">
     <h2> Leaderboard </h2>
     <ul id="leaderboard-list"></ul>
+    <button id="restart">Play again</button>
     </section>
 
 </body>

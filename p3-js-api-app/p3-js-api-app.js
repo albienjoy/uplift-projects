@@ -74,29 +74,20 @@ const gameState = {
 const leaderboardScreen = document.getElementById("leaderboard-screen");
 const leaderboardList = document.getElementById("leaderboard-list")
 
-
 /* Username screen */
-
-// if (savedUsername && savedDifficulty) {
-//     usernameScreen.classList.add("hidden");
-//     difficultyScreen.classList.add("hidden");
-//     gameScreen.classList.remove("hidden");
-//     console.log("if1")
-// } else if (savedUsername) {
-//     usernameScreen.classList.add("hidden");
-//     difficultyScreen.classList.remove("hidden");
-//     gameScreen.classList.add("hidden");
-//         console.log("else if")
-// } else {
-//     gameScreen.classList.add("hidden");
 usernameScreen.classList.remove("hidden");
-// }    console.log("if2")
+
+/*DELETE WHEN FINALIZING --- HIDE ALL OTHER SECTIONS */
+difficultyScreen.classList.remove("hidden");
+gameScreen.classList.remove("hidden");
+leaderboardScreen.classList.remove("hidden");
+
+
 
     usernameBtn.addEventListener("click", () => {
     const username = usernameInput.value.trim();
     if (username === "") {
         alert("Please enter a username");
-        return;
     };
 
     localStorage.setItem("username", username);
@@ -339,20 +330,3 @@ function renderLeaderboard() {
         gameScreen.classList.add("hidden");
     leaderboardScreen.classList.remove("hidden");
 }
-
-// function showLeaderboard() {
-//     const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
-
-//     const top10 = leaderboard.slice(0,10)
-//     console.log("showleaderboard", leaderboard)
-//     top10.innerHTML = "";
-
-//     top10.forEach(entry => {
-//         const li = document.createElement("li");
-//         li.textContent = `${entry.username}: ${entry.score}`;
-//         top10.appendChild(li);
-//     });
-
-//     gameScreen.classList.add("hidden");
-//     leaderboardScreen.classList.remove("hidden");
-// }
