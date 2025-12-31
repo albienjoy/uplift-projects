@@ -28,7 +28,7 @@
         </div>
 
         <div class="username-elements">
-        <img src="username.png" alt="line art of a person">
+        <img src="username.png" alt="line art of a person" id="username-icon">
         <div id="username-header-display">maria gondola bebe gurl</div>
         </div>
     </header>
@@ -54,6 +54,7 @@
     <br>
 
     <section id="difficulty-section" class="hidden difficulty-section">
+        <img src="difficulty.png" alt="level icon" class="body-icons">
         <h2> Select difficulty </h2>
             <button class="difficulty-button push-btn" id="easy-push">
                     <span class="front-btn" id="easy-front" data-level="easy">Easy</span>
@@ -108,8 +109,15 @@
     </section>
 
     <section id="leaderboard-screen" class="hidden leaderboard-section">
+        <img src="leaderboard.png" alt="star" class="body-icons">
         <h2> Leaderboard </h2>
-            <ul id="leaderboard-list"></ul>
+        <div class="leaderboard-headings">
+            <h3>Rank</h3>
+            <h3>Username</h3>
+            <h3>Score</h3>
+        </div>
+            <ul id="leaderboard-list">
+            </ul>
             <button id="replay-btn" class="push-btn">
                 <span class="front-btn">Play again</span>
             </button>

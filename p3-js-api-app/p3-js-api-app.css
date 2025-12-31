@@ -19,7 +19,6 @@ img {
     width: 75px;
 }
 
-
 h2 {
     font-size: 2rem;
     font-weight: normal;
@@ -36,6 +35,10 @@ body, .word-input {
     font-family: Work Sans}
 
 /* Headers */
+#username-icon {
+    width: 50px;
+    height: 50px;
+}
 
 #username-header-display {
     align-items: right;
@@ -65,44 +68,19 @@ header {
 
 .title-effect {
     display: inline-block;
-    font-size: 8rem;
+    font-size: 5.5rem;
     margin: 0 0 1% 0;
-    white-space: nowrap;
     overflow: hidden;
-    width: 0ch;
     
     background: linear-gradient(to right, #56c1ff, #bde87f, #f14894);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-
-    animation: typing 4s steps(24, end) forwards;
 }
-
-.title-effect::after {
-    content: "";
-    display: inline-block;
-    width: 4px;
-    height: .8em;
-    background: orange;
-    margin-left: .08em;
-
-    animation: blink 1s step-end infinite alternate;
-}
-
-@keyframes typing {
-  0%   { width: 0ch; }
-  60%  { width: 24ch; }
-  100% { width: 24ch; }
-}
-
-@keyframes blink {
-    50% {opacity: 0}
-} 
 
 .fading-text-container {
     position: relative;
-    height: 3em;
+    height: 4em;
     width: 100%;
     overflow: hidden;
 }
@@ -141,6 +119,7 @@ header {
 
 /* username input part*/
 #username-prompt {
+    font-size: 1.2em;
     margin: 1.3em 0;
 }
 
@@ -181,6 +160,10 @@ header {
 }
 
 /*difficulty section */
+.body-icons {
+    width: 10em;
+    height: 10em;
+}
 .difficulty-button {
     display: block;
     margin-bottom: 1.5rem;
@@ -226,9 +209,9 @@ header {
 .stats-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    width: 50%;
+    column-gap: 40%;
     margin: auto;
-    margin-bottom: 2rem;
+    margin-bottom: 2em;
 }
 
 .typing-container {
@@ -247,12 +230,12 @@ header {
 }
 
 #timer-label, #timer {
-    font-size: 2.5rem;
+    font-size: 2rem;
     color:#38b6ff;
 }
 
 #score-label, #score {
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: #bde87f;
 }
 
@@ -287,7 +270,6 @@ header {
     align-items: center;
     justify-content: center;
     z-index: 1000;
-
 }
 
 .overlay-box {
@@ -308,11 +290,120 @@ header {
     background-color: #ffde59;
 }
 
+.leaderboard-headings {
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    width: 50%;
+    margin: auto;
+    font-size: 1.5em;
+    margin-bottom: 0;
+}
+
+h3 {
+    color: #bde87f;
+    font-weight: normal;
+}
 
 #leaderboard-list {
-    text-decoration: none;
-    
+    padding: 0;
+    margin-bottom: 4em;
+    width: 60%;
+    margin: auto;
+    margin-bottom: 2em;
+    border-radius: 20px;
+    padding: 1em 0;
 }
+
+#leaderboard-list li {
+    display: grid;
+    list-style-type: none;
+    font-size: 1.3em;
+    grid-template-columns: 1fr 4fr 1fr;
+    width: 90%;
+    align-items: center;
+    padding: .5rem 1rem;
+    margin: auto;
+
+    background: linear-gradient(to right, #f0c3d7, #f14894);
+    border: 3px solid #292b2e;
+    row-gap: 20px;
+    border-radius: 20px;
+
+}
+
+.rank, .username, .score {
+    text-align: center;
+    background: transparent;
+}
+
+.rank {
+    color: #292b2e;
+    font-weight: bold;
+}
+
+@media screen and (min-width: 730px) {
+    
+.title-effect {
+    display: inline-block;
+    font-size: 8rem;
+    margin: 0 0 1% 0;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0ch;
+    
+    background: linear-gradient(to right, #56c1ff, #bde87f, #f14894);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation: typing 4s steps(24, end) forwards;
+}
+.title-effect::after {
+    content: "";
+    display: inline-block;
+    width: 4px;
+    height: .8em;
+    background: orange;
+    margin-left: .08em;
+
+    animation: blink 1s step-end infinite alternate;
+}
+
+@keyframes typing {
+  0%   { width: 0ch; }
+  60%  { width: 10ch; }
+  100% { width: 10ch; }
+}
+
+@keyframes blink {
+    50% {opacity: 0}
+} 
+
+
+#timer, #score {
+    font-size: 3rem;
+    font-weight: bold
+}
+
+#timer-label, #timer {
+    font-size: 2.5rem;
+    color:#38b6ff;
+}
+
+#score-label, #score {
+    font-size: 2.5rem;
+    color: #bde87f;
+}
+
+.stats-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1em;;
+    margin: auto;
+    margin-bottom: 2em;
+}
+}
+
 
 .hidden {
     display: none;

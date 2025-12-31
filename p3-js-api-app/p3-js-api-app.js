@@ -337,19 +337,30 @@ function getTopScore() {
   return leaderboard.sort((a, b) => b.score - a.score).slice(0, 10);
 }
 
-function renderLeaderboard() {
+function renderLeaderboard(leaderboardList) {
   const topScores = getTopScore();
   leaderboardList.innerHTML = "";
 
   topScores.forEach((entry, index) => {
     const li = document.createElement("li");
-    li.textContent = `${index + 1} ${entry.username} - ${entry.score}`;
+    li.innerHTML = `
+    <span class="rank">${index + 1}</span>
+    <span class="username">${entry.username}</span>
+    <span class="score">${entry.score}</span>`;
+
     leaderboardList.appendChild(li);
+    // const li = document.createElement("li");
+    // li.textContent = `${index + 1} ${entry.username} - ${entry.score}`;
+    // leaderboardList.appendChild(li);    
   });
 
   gameScreen.classList.add("hidden");
   leaderboardScreen.classList.remove("hidden");
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderLeaderboard(leaderboardList);
+})
 
 restartBtn.addEventListener("click", () => {
   clearInterval(timerId);
