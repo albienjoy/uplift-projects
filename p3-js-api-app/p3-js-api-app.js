@@ -26,7 +26,7 @@ Avoid extremely common words.
   `
 };
 
-const WORD_BUFFER_SIZE = 15;
+const wordBufferSize = 20;
 const wordBuffer = [];
 const usedWords = new Set();
 const difficultySettings = {
@@ -59,6 +59,9 @@ const scoreDisplay = document.getElementById("score");
 const wordDisplay = document.getElementById("word");
 const wordInput = document.getElementById("word-input");
 const pauseBtn = document.getElementById("pause-btn");
+const pauseBtnText = document.querySelector(".front-btn");
+const restartBtn = document.getElementById("restart-btn");
+const replayBtn = document.getElementById("replay-btn");
 
 /* the brain of my game */
 const gameState = {
@@ -159,7 +162,7 @@ async function fetchWordList(difficulty) {
                 type: "text",
                 text: `You are generating words for a typing game.
                 Rules:
-                - Generate ${WORD_BUFFER_SIZE} UNIQUE English words
+                - Generate ${wordBufferSize} UNIQUE English words
                 - Return only a comma-separated list
                 - No numbering
                 - No explanations
@@ -265,28 +268,35 @@ function updateUI() {
     scoreDisplay.textContent = gameState.score;
 }
 
-pauseBtn.addEventListener("click", (event) => {
- if (!gameState.isPlaying) return;
+// pauseBtnText.addEventListener("click", (event) => {
+//  if (!gameState.isPlaying) return;
 
- gameState.isPaused = !gameState.isPaused;
+//  gameState.isPaused = !gameState.isPaused;
 
- if (gameState.isPaused) {
-    pauseGame();
- } else {
-    resumeGame();
- }
-})
+//  if (gameState.isPaused) {
+//     pauseGame();
+//  } else {
+//     resumeGame();
+//  }
+// })
 
 function pauseGame() {
     wordInput.disabled = true;
-    pauseBtn.textContent = "Resume"
+    pauseBtnText.innerText = "Resume"
 }
 
 function resumeGame() {
     wordInput.disabled = false;
     wordInput.focus();
-    pauseBtn.textContent = "Pause";
+    pauseBtnText.textContent = "Pause";
 }
+
+document.addEventListener("keydown", (event) => {
+    if (event.code === "Space") {
+        event.preventDefault();
+        gameState.isPaused = !gameState.isPaused;
+    }
+})
 
 function endGame() {
   gameState.isPlaying = false;
@@ -331,3 +341,18 @@ function renderLeaderboard() {
         gameScreen.classList.add("hidden");
     leaderboardScreen.classList.remove("hidden");
 }
+
+restartBtn.addEventListener("click", () => {
+
+    startGame();
+    wordInput.disabled = false;
+
+})
+
+replayBtn.addEventListener("click", () => {
+    difficultyScreen.classList.remove("hidden");
+    leaderboardScreen.classList.add("hidden");
+    usernameBtn.classList.add("hidden");
+    gameScreen.classList.add("hidden");
+    startGame();
+})

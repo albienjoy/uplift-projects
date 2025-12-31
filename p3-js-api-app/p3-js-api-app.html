@@ -27,10 +27,6 @@
         <img src="logo.png" alt="logo showing a keyboard key">
         </div>
 
-        <div class="mechanics">
-            Mechanics
-        </div>
-
         <div class="username-elements">
         <img src="username.png" alt="line art of a person">
         <div id="username-header-display">maria gondola bebe gurl</div>
@@ -42,7 +38,13 @@
             <span class="title-effect">Key Sprint</span>
         </div>
         
-        <h2> Enter your username to start</h2>
+        <div class="fading-text-container">
+            <div id="description1" class="fading-text">Type as many words as you can in one minute</div>
+            <div id="description2" class="fading-text">Hit the spacebar to pause or resume</div>
+            <div id="description3" class="fading-text">Get more complex words with the 'Hard' difficulty</div>
+        </div>
+
+        <h2 id="username-prompt"> Enter your username to start</h2>
         <input id="username-input" type="text" placeholder="Username" autofocus>
         <br><button id="username-btn" class="push-btn">
             <span class="front-btn">Continue</span>
@@ -79,15 +81,15 @@
             <div id="word">Quote</div> 
             <input id="word-input" placeholder="Sprint!" autofocus></input>
         </div>
-        <button id="pause-btn" class="push-btn">
-            <span class="front-btn">Pause</span>
-        </button>
+                    <button id="restart-btn" class="push-btn">
+                <span class="front-btn">Restart</span>
+            </button>
     </section>
 
     <section id="leaderboard-screen" class="hidden leaderboard-section">
         <h2> Leaderboard </h2>
             <ul id="leaderboard-list"></ul>
-            <button id="restart" class="push-btn">
+            <button id="replay-btn" class="push-btn">
                 <span class="front-btn">Play again</span>
             </button>
     </section>
