@@ -20,10 +20,6 @@ img {
 }
 
 
-.hidden {
-    display: none;
-}
-
 h2 {
     font-size: 2rem;
     font-weight: normal;
@@ -143,7 +139,6 @@ header {
     100% {opacity: 0} 
 }
 
-
 /* username input part*/
 #username-prompt {
     margin: 1.3em 0;
@@ -212,12 +207,12 @@ header {
 }
 
 #hard-push {
-    background: #712648;
+    background: #cb3177;
         width: 20rem;
 }
 
 #hard-front {
-    background: #f14894;
+    background: #f7759b;
 }
 
 
@@ -282,4 +277,43 @@ header {
 
 #word-input:focus {
     border-color: rgb(90, 40, 182);
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+
+}
+
+.overlay-box {
+    padding: 2rem 3rem;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.overlay-push {
+    display: block;
+    background-color:#f14894;
+    width: 18em;
+    margin-bottom: 1em;
+}
+
+.overlay-front{
+    font-size: 1em;
+    background-color: #ffde59;
+}
+
+
+#leaderboard-list {
+    text-decoration: none;
+    
+}
+
+.hidden {
+    display: none;
 }
