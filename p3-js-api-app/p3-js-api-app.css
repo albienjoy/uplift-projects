@@ -24,30 +24,39 @@ h2 {
     font-weight: normal;
 }
 
-body {
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-}
-
-body, .word-input {
-    font-family: Work Sans}
-
 /* Headers */
 #username-icon {
+    /* position: absolute;
+    right: 35%; */
     width: 50px;
     height: 50px;
 }
 
 #username-header-display {
-    align-items: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* position: absolute; */
+    /* right: 19%;
+    top: 7%;
+    width: 15%;
+    height: 5%; */
+    background: transparent;
 }
 
 .logo-elements {
     display: flex;
     gap: 1rem;
 }
+
+#logo {
+    animation: ease-in-out;
+}
+
+#logo:hover {
+    transform: translateY(3px);
+}
+
 
 header {
     display: flex;
@@ -61,6 +70,10 @@ header {
     align-items: center;
 }
 
+#username-error {
+    color: #f14894;
+    font-size: 1.2em;
+}
 /* username screen */
 .title-container {
     text-align: center;
@@ -94,7 +107,7 @@ header {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    animation: fadeInOut 9s linear infinite;
+    animation: fadeInOut 12s linear infinite;
 }
 
 #description1 {
@@ -107,6 +120,10 @@ header {
 
 #description3 {
     animation-delay: 6s;
+}
+
+#description4 {
+    animation-delay: 9s;
 }
 
 @keyframes fadeInOut {
@@ -198,6 +215,10 @@ header {
     background: #f7759b;
 }
 
+#difficulty-tip {
+    color: #70c8fa;
+    font-size: 1.2rem;
+}
 
 /*game screen*/
 .game-section {
@@ -290,12 +311,18 @@ header {
     background-color: #ffde59;
 }
 
+#user-score {
+    margin-bottom: 1.1rem;
+    color: #bde87f;
+    font-weight: bold;
+}
+
 .leaderboard-headings {
     display: grid;
     grid-template-columns: 1fr 4fr 1fr;
     width: 50%;
     margin: auto;
-    font-size: 1.5em;
+    font-size: 1em;
     margin-bottom: 0;
 }
 
@@ -317,7 +344,7 @@ h3 {
 #leaderboard-list li {
     display: grid;
     list-style-type: none;
-    font-size: 1.3em;
+    font-size: 1em;
     grid-template-columns: 1fr 4fr 1fr;
     width: 90%;
     align-items: center;
@@ -342,7 +369,8 @@ h3 {
 }
 
 @media screen and (min-width: 730px) {
-    
+
+
 .title-effect {
     display: inline-block;
     font-size: 8rem;
@@ -401,6 +429,14 @@ h3 {
     gap: 1em;;
     margin: auto;
     margin-bottom: 2em;
+}
+
+.leaderboard-headings {
+    font-size: 1.5em;
+}
+
+#leaderboard-list li {
+    font-size: 1.3em;
 }
 }
 

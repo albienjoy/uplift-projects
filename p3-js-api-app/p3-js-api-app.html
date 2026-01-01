@@ -9,27 +9,21 @@
     <link rel="stylesheet" href="p3-js-api-app.css">
     <script src="p3-js-api-app.js" defer></script>
 
-    /*work sans*/
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Capriola&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
-    /* roboto mono */
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
     <header>
         <div class="logo-elements">
-        <img src="logo.png" alt="logo showing a keyboard key">
+        <img src="logo.png" alt="logo showing a keyboard key" id="logo">
         </div>
 
         <div class="username-elements">
-        <img src="username.png" alt="line art of a person" id="username-icon">
-        <div id="username-header-display">maria gondola bebe gurl</div>
+        <img src="username.png" alt="line art of a person" id="username-icon" class="hidden">
+        <div id="username-header-display"></div>
         </div>
     </header>
 
@@ -42,13 +36,15 @@
             <div id="description1" class="fading-text">Type as many words as you can in one minute</div>
             <div id="description2" class="fading-text">Hit the spacebar to pause or resume</div>
             <div id="description3" class="fading-text">Get more complex words with the 'Hard' difficulty</div>
+            <div id="description4" class="fading-text">Hit the downward arrow ⬇ to mute the audio</div>
         </div>
 
-        <h2 id="username-prompt"> Enter your username to start</h2>
+        <h2 id="username-prompt">What's your name?</h2>
         <input id="username-input" type="text" placeholder="Username" autofocus>
         <br><button id="username-btn" class="push-btn">
             <span class="front-btn">Continue</span>
         </button>
+        <p id="username-error" class="hidden">Enter a username to start</p>
     </section>
     
     <br>
@@ -67,9 +63,18 @@
             <button class="difficulty-button push-btn" id="hard-push">
                 <span class="front-btn" id="hard-front" data-level="hard">Hard</span>
             </button>
+
+            <div id="difficulty-tip">Tip: Click the logo on the upper right to go back to this section later</div>
+
     </section>
    
     <section id="game-section" class="hidden game-section">
+        <audio autoplay id="background-music">
+            <source src="the console of my dreams.mp3" type="audio/mp3">
+        </audio>
+        <audio autoplay id="countdown-music">
+            <source src="3s-countdown.mp3" type="audio/mp3">
+        </audio>
         <div class="stats-container">
             <div id="timer-label">Timer</div>
             <div id="score-label">Score</div>
@@ -78,11 +83,21 @@
             <div id="score">0</div>
         </div>
 
+        <div class="typing-container">
+            <div id="word"></div> 
+            <input id="word-input" placeholder="Type here" autofocus></input>
+        </div>
+            <button class="push-btn restart-btn">
+                <span class="front-btn">Restart</span>
+            </button>
+
         <div id="gameover-overlay" class="overlay hidden">
             <div id="gameover-box" class="overlay-box">
                 <h2>Game over!</h2>
                 <p>You've reached the finish line</p>
-                <button id="restart-btn" class="push-btn overlay-push">
+                <p id="user-score"></p>
+
+                <button class="push-btn overlay-push restart-btn">
                 <span class="front-btn overlay-front">Restart</span>
                 </button>
                 <button id="leaderboard-btn" class="push-btn overlay-push">
@@ -97,15 +112,6 @@
                 <p>Hit the spacebar to resume</p>
             </div>
         </div>
-
-
-        <div class="typing-container">
-            <div id="word">Quote</div> 
-            <input id="word-input" placeholder="Type new word" autofocus></input>
-        </div>
-            <button id="restart-btn" class="push-btn">
-                <span class="front-btn">Restart</span>
-            </button>
     </section>
 
     <section id="leaderboard-screen" class="hidden leaderboard-section">

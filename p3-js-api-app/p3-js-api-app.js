@@ -1,7 +1,14 @@
-const apiKey = "OmclmpULcP9CCYjDrI8Dn1r2RDUFYp1m2FTcEwIa";
-
+//COHERE
+const apiKey = "sTnnOYfqToCeyfh5tJ86FYy9Pj17gjJ0TgKuJINp";
 const serverURL = "https://api.cohere.com/v2/chat";
 const model = "command-a-03-2025";
+let isFetchingWords = false;
+
+//OpenAi
+// const apiKey = "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"
+// const serverURL = "https://api.openai.com/v1/responses"
+// const model = "gpt-5-nano";
+
 
 const difficultyPrompts = {
   easy: `
@@ -25,21 +32,23 @@ May include jargon or advanced terms.
 Avoid extremely common words.
   `,
 };
-
+const logoIcon = document.getElementById("logo");
+const usernameIcon = document.getElementById("username-icon");
 const wordBufferSize = 20;
 const wordBuffer = [];
 const usedWords = new Set();
+// update time before finalizing!!
 const difficultySettings = {
   easy: {
-    time: 60,
+    time: 10,
     multiplier: 1,
   },
   medium: {
-    time: 60,
+    time: 10,
     multiplier: 2,
   },
   hard: {
-    time: 60,
+    time: 10,
     multiplier: 3,
   },
 };
@@ -53,8 +62,14 @@ const usernameBtn = document.getElementById("username-btn");
 const usernameHeaderDisplay = document.getElementById(
   "username-header-display"
 );
+const usernameError = document.getElementById("username-error")
+
 const savedUsername = localStorage.getItem("username");
 const savedDifficulty = localStorage.getItem("difficulty");
+
+// audio
+const backgroundAudio = document.getElementById("background-music");
+const countdownAudio = document.getElementById("countdown-music");
 
 const timeDisplay = document.getElementById("timer");
 const scoreDisplay = document.getElementById("score");
@@ -62,15 +77,13 @@ const wordDisplay = document.getElementById("word");
 const gameoverOverlay = document.getElementById("gameover-overlay");
 
 const wordInput = document.getElementById("word-input");
-const pauseBtn = document.getElementById("pause-btn");
-const pauseBtnText = document.querySelector(".front-btn");
+
 const pauseOverlay = document.getElementById("pause-overlay");
-const restartBtn = document.getElementById("restart-btn");
+const restartBtns = document.querySelectorAll(".restart-btn");
 const replayBtn = document.getElementById("replay-btn");
 const leaderboardBtn = document.getElementById("leaderboard-btn");
 let timerId = null;
 
-/* the brain of my game */
 const gameState = {
   username: localStorage.getItem("username"),
   difficulty: localStorage.getItem("difficulty"),
@@ -83,36 +96,45 @@ const gameState = {
 
 const leaderboardScreen = document.getElementById("leaderboard-screen");
 const leaderboardList = document.getElementById("leaderboard-list");
+const userScore = document.getElementById("user-score");
+
+backgroundAudio.autoplay = false;
+backgroundAudio.muted = true;
+countdownAudio.autoplay = false;
+countdownAudio.muted = true;
 
 /* Username screen */
 usernameScreen.classList.remove("hidden");
 
-/*DELETE WHEN FINALIZING --- HIDE ALL OTHER SECTIONS */
-difficultyScreen.classList.remove("hidden");
-gameScreen.classList.remove("hidden");
-leaderboardScreen.classList.remove("hidden");
-// gameoverOverlay.classList.remove("hidden")
-pauseOverlay.classList.add("hidden");
-
-usernameBtn.addEventListener("click", () => {
-  const username = usernameInput.value.trim();
+logoIcon.addEventListener("click", () => {
+    const username = usernameInput.value.trim();
   if (username === "") {
-    alert("Please enter a username");
-    usernameScreen.classList.remove("hidden");
-  }
-
-  localStorage.setItem("username", username);
-
-  usernameHeaderDisplay.append(username);
+  usernameError.classList.remove("hidden");
+  } else {
   usernameScreen.classList.add("hidden");
   difficultyScreen.classList.remove("hidden");
   leaderboardScreen.classList.add("hidden");
   gameoverOverlay.classList.add("hidden");
   pauseOverlay.classList.add("hidden");
+  usernameIcon.classList.remove("hidden")
+}
+});
+
+usernameBtn.addEventListener("click", () => {
+  const username = usernameInput.value.trim();
+  if (username === "") {
+    usernameError.classList.remove("hidden");
+    usernameScreen.classList.remove("hidden");
+  } else {
+    localStorage.setItem("username", username);
+    usernameScreen.classList.add("hidden")
+    usernameHeaderDisplay.append(username);
+    usernameIcon.classList.remove("hidden")
+    difficultyScreen.classList.remove("hidden");
+  }
 });
 
 difficultyScreen.addEventListener("click", (event) => {
-  /* putting the code in the diffulcty screen helps with event delegation */
   console.log("Clicked difficulty:", event.target.dataset.level);
   if (!event.target.dataset.level) return;
 
@@ -131,6 +153,10 @@ async function startGame() {
   const difficulty = localStorage.getItem("difficulty");
   const { time, multiplier } = difficultySettings[difficulty];
 
+console.log("difficulty key:", difficulty);
+console.log("difficultySettings:", difficultySettings);
+console.log("startgame() settings picked:", difficultySettings[difficulty]);
+
   gameState.timeLeft = time;
   gameState.multiplier = multiplier;
 
@@ -142,20 +168,23 @@ async function startGame() {
   showNewWord();
   startTimer();
 
+  backgroundAudio.autoplay = true;
+  backgroundAudio.muted = false;
+  backgroundAudio.load();
+  backgroundAudio.play();
+  backgroundAudio.loop = true;
+
   usernameScreen.classList.add("hidden");
   difficultyScreen.classList.add("hidden");
   leaderboardScreen.classList.add("hidden");
   gameScreen.classList.remove("hidden");
-
   gameoverOverlay.classList.add("hidden");
   pauseOverlay.classList.add("hidden");
 }
 
 function setupGame() {
-  const settings = difficultySettings[gameState.difficulty];
   const difficulty = localStorage.getItem("difficulty");
-  console.log("Difficulty:", difficulty);
-  console.log("Settings:", settings);
+  const settings = difficultySettings[difficulty];
 
   gameState.timeLeft = settings.time;
   gameState.score = 0;
@@ -164,7 +193,13 @@ function setupGame() {
   updateUI();
 }
 
+console.log("API KEY PRESENT:", Boolean(apiKey), apiKey?.slice(0, 6));
+//COHERE fxns (line 196-267)
 async function fetchWordList(difficulty) {
+if (isFetchingWords) return;
+
+isFetchingWords = true;
+
   try {
     const previousWords = Array.from(usedWords);
     const payload = {
@@ -183,10 +218,10 @@ async function fetchWordList(difficulty) {
                 - No explanations
                 - No duplicates
                 - Do not repeat any previously used words
-                
+
                 Difficulty rules:
                 ${difficultyPrompts[difficulty]}
-                
+
                 Previously used words:
                 ${previousWords || "none"}`.trim(),
             },
@@ -232,6 +267,9 @@ async function fetchWordList(difficulty) {
   } catch (error) {
     console.log("Error fetching word list!");
     return null;
+
+  } finally {
+    isFetchingWords = false;
   }
 }
 
@@ -241,6 +279,79 @@ async function getNextWord(difficulty) {
   }
   return wordBuffer.shift() || null;
 }
+
+//OPENAI
+// async function fetchWordList(difficulty) {
+//   try {
+//     const previousWords = Array.from(usedWords);
+//     const prompt = `You are generating words for a typing game.
+//                 Rules:
+//                 - Generate ${wordBufferSize} UNIQUE English words
+//                 - Return only a comma-separated list
+//                 - No numbering
+//                 - No explanations
+//                 - No duplicates
+//                 - Do not repeat any previously used words
+
+//                 Difficulty rules:
+//                 ${difficultyPrompts[difficulty]}
+
+//                 Previously used words:
+//                 ${previousWords || "none"}`.trim()
+            
+          
+//       const payload = {
+//         model: model,
+//         input: prompt,
+//       };
+  
+//     const response = await fetch(serverURL, {
+//       method: "POST",
+//       headers: {
+//         Accept: "application/json",
+//         "Content-Type": "application/json",
+//         Authorization: `Bearer ${apiKey}`,
+//       },
+//       body: JSON.stringify(payload),
+//     });
+
+//     if (!response.ok) {
+//       throw new Error(`API error: ${response.status}`);
+//     }
+
+//     const result = await response.json();
+
+//     const rawText = result.output.text;
+
+//     if (!rawText) {
+//       throw new Error("No text returned from OpenAI")
+//     }
+
+//     const newWords = rawText
+//       .split(",")
+//       .map((w) => w.trim().toLowerCase())
+//       .filter((w) => w && !usedWords.has(w));
+
+//     newWords.forEach((w) => usedWords.add(w));
+//     wordBuffer.push(...newWords);
+
+
+//     console.log(wordBuffer);
+//     console.log(usedWords);
+
+//   } catch (error) {
+//     console.log("Error fetching word list!");
+//     return null;
+//   }
+// }
+
+// async function getNextWord(difficulty) {
+//   if (wordBuffer.length < 3) {
+//     await fetchWordList(difficulty);
+//   }
+//   return wordBuffer.shift() || null;
+// }
+//end of OPENAI
 
 async function showNewWord() {
   const word = await getNextWord();
@@ -257,7 +368,9 @@ wordInput.addEventListener("input", () => {
 });
 
 function handleCorrectword() {
-  const multiplier = difficultySettings[gameState.difficulty].multiplier;
+  const difficulty = localStorage.getItem("difficulty");
+  const multiplier = difficultySettings[difficulty].multiplier;
+
   gameState.score += 1 * multiplier;
   scoreDisplay.textContent = gameState.score;
 
@@ -274,6 +387,13 @@ function startTimer() {
       timerId = null;
       endGame();
       return;
+    }
+
+    if (gameState.timeLeft === 3) {
+      countdownAudio.muted = false;
+      countdownAudio.autoplay = true;
+      countdownAudio.load();
+      countdownAudio.play();
     }
 
     gameState.timeLeft--;
@@ -303,8 +423,12 @@ document.addEventListener("keydown", (event) => {
     gameState.isPaused = !gameState.isPaused;
 
     if (gameState.isPaused) {
+      backgroundAudio.pause();
+      countdownAudio.pause();
       pauseOverlay.classList.remove("hidden");
     } else {
+      backgroundAudio.play();
+      countdownAudio.play();
       pauseOverlay.classList.add("hidden");
     }
   }
@@ -314,13 +438,17 @@ function endGame() {
   gameState.isPlaying = false;
   wordInput.disabled = true;
 
+  userScore.textContent = ""
   gameoverOverlay.classList.remove("hidden");
+  const score = gameState.score;
+  userScore.textContent = `Your score: ${gameState.score}`;
+  backgroundAudio.autoplay = false;
+  backgroundAudio.muted = true;
   saveScore();
 }
 
 function saveScore() {
   const leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
-
   const username = localStorage.getItem("username");
 
   leaderboard.push({
@@ -349,23 +477,19 @@ function renderLeaderboard(leaderboardList) {
     <span class="score">${entry.score}</span>`;
 
     leaderboardList.appendChild(li);
-    // const li = document.createElement("li");
-    // li.textContent = `${index + 1} ${entry.username} - ${entry.score}`;
-    // leaderboardList.appendChild(li);    
   });
-
-  gameScreen.classList.add("hidden");
-  leaderboardScreen.classList.remove("hidden");
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   renderLeaderboard(leaderboardList);
-})
+});
 
-restartBtn.addEventListener("click", () => {
+restartBtns.forEach(button => {
+  button.addEventListener("click", () => {
   clearInterval(timerId);
   startGame();
   wordInput.disabled = false;
+  })
 });
 
 replayBtn.addEventListener("click", () => {
@@ -373,8 +497,9 @@ replayBtn.addEventListener("click", () => {
   leaderboardScreen.classList.add("hidden");
   usernameScreen.classList.add("hidden");
   gameScreen.classList.add("hidden");
+  gameoverOverlay.classList.add("hidden");
   clearInterval(timerId);
-  startGame();
+  wordInput.disabled = false;
 });
 
 leaderboardBtn.addEventListener("click", () => {
@@ -383,4 +508,10 @@ leaderboardBtn.addEventListener("click", () => {
   leaderboardScreen.classList.remove("hidden");
   gameScreen.classList.add("hidden");
   renderLeaderboard();
+});
+
+document.addEventListener("keydown", () => {
+  if (event.code === "ArrowDown") {
+    backgroundAudio.muted = !backgroundAudio.muted;
+  }
 });
