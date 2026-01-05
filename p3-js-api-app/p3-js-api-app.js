@@ -490,17 +490,6 @@ function updateUI() {
   scoreDisplay.textContent = gameState.score;
 }
 
-function pauseGame() {
-  wordInput.disabled = true;
-  pauseOverlay.classList.remove("hidden");
-}
-
-function resumeGame() {
-  wordInput.disabled = false;
-  wordInput.focus();
-  pauseOverlay.classList.add("hidden");
-}
-
 document.addEventListener("keydown", (event) => {
   if (event.code === "Space") {
     event.preventDefault();
@@ -517,6 +506,13 @@ document.addEventListener("keydown", (event) => {
     }
   }
 });
+
+document.addEventListener("keydown", () => {
+  if (event.code === "ArrowDown") {
+    backgroundAudio.muted = !backgroundAudio.muted;
+  }
+});
+
 
 function endGame() {
   gameState.isPlaying = false;
@@ -592,10 +588,4 @@ leaderboardBtn.addEventListener("click", () => {
   leaderboardScreen.classList.remove("hidden");
   gameScreen.classList.add("hidden");
   renderLeaderboard();
-});
-
-document.addEventListener("keydown", () => {
-  if (event.code === "ArrowDown") {
-    backgroundAudio.muted = !backgroundAudio.muted;
-  }
 });
