@@ -1,14 +1,168 @@
-//COHERE
 const apiKey = "sTnnOYfqToCeyfh5tJ86FYy9Pj17gjJ0TgKuJINp";
 const serverURL = "https://api.cohere.com/v2/chat";
 const model = "command-a-03-2025";
 let isFetchingWords = false;
 
-//OpenAi
-// const apiKey = "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"
-// const serverURL = "https://api.openai.com/v1/responses"
-// const model = "gpt-5-nano";
-
+const fallbackWords = {
+  easy: [
+    "apple",
+    "chair",
+    "bread",
+    "plant",
+    "house",
+    "mouse",
+    "water",
+    "smile",
+    "table",
+    "light",
+    "green",
+    "paper",
+    "train",
+    "clock",
+    "stone",
+    "brush",
+    "river",
+    "sleep",
+    "drink",
+    "laugh",
+    "cloud",
+    "grass",
+    "heart",
+    "shirt",
+    "floor",
+    "sweet",
+    "round",
+    "sound",
+    "happy",
+    "quiet",
+    "beach",
+    "candy",
+    "dance",
+    "fruit",
+    "grain",
+    "knife",
+    "lemon",
+    "money",
+    "night",
+    "piano",
+    "smoke",
+    "spoon",
+    "sugar",
+    "toast",
+    "truck",
+    "watch",
+    "wheat",
+    "world",
+    "write",
+    "young",
+    "wined",
+    "throne",
+    "drone",
+  ],
+  medium: [
+    "window",
+    "pencil",
+    "forest",
+    "battery",
+    "signal",
+    "picture",
+    "teacher",
+    "journey",
+    "balance",
+    "machine",
+    "plastic",
+    "library",
+    "weather",
+    "capture",
+    "diamond",
+    "freedom",
+    "harvest",
+    "improve",
+    "message",
+    "pattern",
+    "problem",
+    "process",
+    "regular",
+    "service",
+    "support",
+    "traffic",
+    "welcome",
+    "benefit",
+    "channel",
+    "control",
+    "digital",
+    "element",
+    "factory",
+    "feature",
+    "gravity",
+    "history",
+    "journal",
+    "kitchen",
+    "natural",
+    "outline",
+    "protect",
+    "quarter",
+    "science",
+    "storage",
+    "subject",
+    "theory",
+    "typical",
+    "utility",
+    "version",
+    "shelter",
+  ],
+  hard: [
+    "algorithm",
+    "paradigm",
+    "framework",
+    "interface",
+    "synthesis",
+    "prototype",
+    "bandwidth",
+    "metaphor",
+    "architecture",
+    "cognitive",
+    "derivative",
+    "equation",
+    "hierarchy",
+    "hypothesis",
+    "inference",
+    "iteration",
+    "magnitude",
+    "nebulous",
+    "paradox",
+    "quantify",
+    "resonance",
+    "semantics",
+    "threshold",
+    "trajectory",
+    "asymmetry",
+    "calibrate",
+    "constraint",
+    "dichotomy",
+    "empirical",
+    "granular",
+    "heuristic",
+    "idempotent",
+    "juxtapose",
+    "kinematic",
+    "logarithm",
+    "monolithic",
+    "nonlinear",
+    "orthogonal",
+    "polymorph",
+    "recursive",
+    "refactor",
+    "subsystem",
+    "telemetry",
+    "ubiquity",
+    "vectorize",
+    "workload",
+    "xenolith",
+    "yield-rate",
+    "zero-day",
+  ],
+};
 
 const difficultyPrompts = {
   easy: `
@@ -34,21 +188,20 @@ Avoid extremely common words.
 };
 const logoIcon = document.getElementById("logo");
 const usernameIcon = document.getElementById("username-icon");
-const wordBufferSize = 20;
+const wordBufferSize = 35;
 const wordBuffer = [];
 const usedWords = new Set();
-// update time before finalizing!!
 const difficultySettings = {
   easy: {
-    time: 10,
+    time: 60,
     multiplier: 1,
   },
   medium: {
-    time: 10,
+    time: 45,
     multiplier: 2,
   },
   hard: {
-    time: 10,
+    time: 30,
     multiplier: 3,
   },
 };
@@ -62,12 +215,11 @@ const usernameBtn = document.getElementById("username-btn");
 const usernameHeaderDisplay = document.getElementById(
   "username-header-display"
 );
-const usernameError = document.getElementById("username-error")
+const usernameError = document.getElementById("username-error");
 
 const savedUsername = localStorage.getItem("username");
 const savedDifficulty = localStorage.getItem("difficulty");
 
-// audio
 const backgroundAudio = document.getElementById("background-music");
 const countdownAudio = document.getElementById("countdown-music");
 
@@ -107,17 +259,17 @@ countdownAudio.muted = true;
 usernameScreen.classList.remove("hidden");
 
 logoIcon.addEventListener("click", () => {
-    const username = usernameInput.value.trim();
+  const username = usernameInput.value.trim();
   if (username === "") {
-  usernameError.classList.remove("hidden");
+    usernameError.classList.remove("hidden");
   } else {
-  usernameScreen.classList.add("hidden");
-  difficultyScreen.classList.remove("hidden");
-  leaderboardScreen.classList.add("hidden");
-  gameoverOverlay.classList.add("hidden");
-  pauseOverlay.classList.add("hidden");
-  usernameIcon.classList.remove("hidden")
-}
+    usernameScreen.classList.add("hidden");
+    difficultyScreen.classList.remove("hidden");
+    leaderboardScreen.classList.add("hidden");
+    gameoverOverlay.classList.add("hidden");
+    pauseOverlay.classList.add("hidden");
+    usernameIcon.classList.remove("hidden");
+  }
 });
 
 usernameBtn.addEventListener("click", () => {
@@ -127,15 +279,14 @@ usernameBtn.addEventListener("click", () => {
     usernameScreen.classList.remove("hidden");
   } else {
     localStorage.setItem("username", username);
-    usernameScreen.classList.add("hidden")
+    usernameScreen.classList.add("hidden");
     usernameHeaderDisplay.append(username);
-    usernameIcon.classList.remove("hidden")
+    usernameIcon.classList.remove("hidden");
     difficultyScreen.classList.remove("hidden");
   }
 });
 
 difficultyScreen.addEventListener("click", (event) => {
-  console.log("Clicked difficulty:", event.target.dataset.level);
   if (!event.target.dataset.level) return;
 
   const difficulty = event.target.dataset.level;
@@ -152,10 +303,6 @@ difficultyScreen.addEventListener("click", (event) => {
 async function startGame() {
   const difficulty = localStorage.getItem("difficulty");
   const { time, multiplier } = difficultySettings[difficulty];
-
-console.log("difficulty key:", difficulty);
-console.log("difficultySettings:", difficultySettings);
-console.log("startgame() settings picked:", difficultySettings[difficulty]);
 
   gameState.timeLeft = time;
   gameState.multiplier = multiplier;
@@ -193,12 +340,10 @@ function setupGame() {
   updateUI();
 }
 
-console.log("API KEY PRESENT:", Boolean(apiKey), apiKey?.slice(0, 6));
-//COHERE fxns (line 196-267)
 async function fetchWordList(difficulty) {
-if (isFetchingWords) return;
+  if (isFetchingWords) return;
 
-isFetchingWords = true;
+  isFetchingWords = true;
 
   try {
     const previousWords = Array.from(usedWords);
@@ -262,15 +407,27 @@ isFetchingWords = true;
 
     newWords.forEach((w) => usedWords.add(w));
     wordBuffer.push(...newWords);
-    console.log(wordBuffer);
-    console.log(usedWords);
   } catch (error) {
-    console.log("Error fetching word list!");
+    getFallbackWords(difficulty, wordBufferSize);
     return null;
-
   } finally {
     isFetchingWords = false;
   }
+}
+
+function getFallbackWords(difficulty, count) {
+  const pool = fallbackWords[difficulty] || [];
+  const available = pool.filter((w) => !usedWords.has(w));
+
+  for (let i = available.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [available[i], available[j]] = [available[j], available[i]];
+  }
+
+  const selected = available.slice(0, count);
+
+  selected.forEach((w) => usedWords.add(w));
+  wordBuffer.push(...selected);
 }
 
 async function getNextWord(difficulty) {
@@ -279,79 +436,6 @@ async function getNextWord(difficulty) {
   }
   return wordBuffer.shift() || null;
 }
-
-//OPENAI
-// async function fetchWordList(difficulty) {
-//   try {
-//     const previousWords = Array.from(usedWords);
-//     const prompt = `You are generating words for a typing game.
-//                 Rules:
-//                 - Generate ${wordBufferSize} UNIQUE English words
-//                 - Return only a comma-separated list
-//                 - No numbering
-//                 - No explanations
-//                 - No duplicates
-//                 - Do not repeat any previously used words
-
-//                 Difficulty rules:
-//                 ${difficultyPrompts[difficulty]}
-
-//                 Previously used words:
-//                 ${previousWords || "none"}`.trim()
-            
-          
-//       const payload = {
-//         model: model,
-//         input: prompt,
-//       };
-  
-//     const response = await fetch(serverURL, {
-//       method: "POST",
-//       headers: {
-//         Accept: "application/json",
-//         "Content-Type": "application/json",
-//         Authorization: `Bearer ${apiKey}`,
-//       },
-//       body: JSON.stringify(payload),
-//     });
-
-//     if (!response.ok) {
-//       throw new Error(`API error: ${response.status}`);
-//     }
-
-//     const result = await response.json();
-
-//     const rawText = result.output.text;
-
-//     if (!rawText) {
-//       throw new Error("No text returned from OpenAI")
-//     }
-
-//     const newWords = rawText
-//       .split(",")
-//       .map((w) => w.trim().toLowerCase())
-//       .filter((w) => w && !usedWords.has(w));
-
-//     newWords.forEach((w) => usedWords.add(w));
-//     wordBuffer.push(...newWords);
-
-
-//     console.log(wordBuffer);
-//     console.log(usedWords);
-
-//   } catch (error) {
-//     console.log("Error fetching word list!");
-//     return null;
-//   }
-// }
-
-// async function getNextWord(difficulty) {
-//   if (wordBuffer.length < 3) {
-//     await fetchWordList(difficulty);
-//   }
-//   return wordBuffer.shift() || null;
-// }
-//end of OPENAI
 
 async function showNewWord() {
   const word = await getNextWord();
@@ -438,7 +522,7 @@ function endGame() {
   gameState.isPlaying = false;
   wordInput.disabled = true;
 
-  userScore.textContent = ""
+  userScore.textContent = "";
   gameoverOverlay.classList.remove("hidden");
   const score = gameState.score;
   userScore.textContent = `Your score: ${gameState.score}`;
@@ -484,12 +568,12 @@ document.addEventListener("DOMContentLoaded", () => {
   renderLeaderboard(leaderboardList);
 });
 
-restartBtns.forEach(button => {
+restartBtns.forEach((button) => {
   button.addEventListener("click", () => {
-  clearInterval(timerId);
-  startGame();
-  wordInput.disabled = false;
-  })
+    clearInterval(timerId);
+    startGame();
+    wordInput.disabled = false;
+  });
 });
 
 replayBtn.addEventListener("click", () => {

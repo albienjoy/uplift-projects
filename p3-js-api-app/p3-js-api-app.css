@@ -1,4 +1,3 @@
-/* Global elements */
 * {
     box-sizing: border-box;
     background-color: #292b2e;
@@ -24,10 +23,7 @@ h2 {
     font-weight: normal;
 }
 
-/* Headers */
 #username-icon {
-    /* position: absolute;
-    right: 35%; */
     width: 50px;
     height: 50px;
 }
@@ -36,11 +32,6 @@ h2 {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    /* position: absolute; */
-    /* right: 19%;
-    top: 7%;
-    width: 15%;
-    height: 5%; */
     background: transparent;
 }
 
@@ -74,7 +65,7 @@ header {
     color: #f14894;
     font-size: 1.2em;
 }
-/* username screen */
+
 .title-container {
     text-align: center;
 }
@@ -134,7 +125,6 @@ header {
     100% {opacity: 0} 
 }
 
-/* username input part*/
 #username-prompt {
     font-size: 1.2em;
     margin: 1.3em 0;
@@ -176,7 +166,6 @@ header {
     transform: translateY(-2px);
 }
 
-/*difficulty section */
 .body-icons {
     width: 10em;
     height: 10em;
@@ -220,7 +209,6 @@ header {
     font-size: 1.2rem;
 }
 
-/*game screen*/
 .game-section {
     display: block;
     margin-left: auto;
@@ -275,7 +263,7 @@ header {
     height: 5rem;
     text-align: center;
     resize: none;
-    overflow: hidden;/*hides scrollbar*/
+    overflow: hidden;
     color: black
 }
 
