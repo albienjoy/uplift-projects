@@ -507,7 +507,7 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-document.addEventListener("keydown", () => {
+document.addEventListener("keydown", (event) => {
   if (event.code === "ArrowDown") {
     backgroundAudio.muted = !backgroundAudio.muted;
   }
