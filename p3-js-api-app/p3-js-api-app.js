@@ -1,4 +1,4 @@
-const apiKey = "sTnnOYfqToCeyfh5tJ86FYy9Pj17gjJ0TgKuJINp";
+const apiKey = "c1Rubk9ZZnFUb0NleWZoNXRKODZGWXk5UGoxN2dqSjBUZ0t1SklOcA==";
 const serverURL = "https://api.cohere.com/v2/chat";
 const model = "command-a-03-2025";
 let isFetchingWords = false;
@@ -387,7 +387,7 @@ async function fetchWordList(difficulty) {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
+        Authorization: `Bearer ${atob(apiKey)}`,
       },
       body: JSON.stringify(payload),
     });
