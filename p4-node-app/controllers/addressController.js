@@ -2,7 +2,7 @@ import Addresses from "../models/addressModel.js";
 
 const listRecord = async (req, res) => {
   try {
-    const records = await Addresses.find();
+    const records = await Addresses.find().populate("user");
 
     res.json(records);
   } catch (err) {
@@ -12,9 +12,13 @@ const listRecord = async (req, res) => {
 
 const createRecord = async (req, res) => {
   try {
-    const newData = req.body;
-    const record = new Addresses(newData);
+    const { houseNum, street, barangay, city, province, zipCode } = req.body;
+    const record = new Addresses({
+      username: req.session.userId,
+      houseNum, street, barangay, city, province, zipCode
+    });
 
+    console.log(req.session.userId);
     await record.save();
 
     res.json(record);
@@ -26,7 +30,7 @@ const createRecord = async (req, res) => {
 const readRecord = async (req, res) => {
   try {
     const id = req.params.id;
-    const record = await Addresses.findById(id);
+    const record = await Addresses.findById(id).populate("username");
 
     if (!record) {
       res.json({ error: "Record not found" });

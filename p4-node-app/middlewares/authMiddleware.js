@@ -8,7 +8,7 @@ const isAuthenticated = (req, res, next) => {
 
 const isAllowed = (req, res, next) => {
   if (!req.session.userId) {
-    res.json({ error: "You don't have enough access" });
+    res.json({ error: "You don't have enough access to do this" });
     return;
   };
   next();

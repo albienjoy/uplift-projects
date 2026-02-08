@@ -21,7 +21,6 @@ const createRecord = async (req, res) => {
       quantity
     });
 
-
     const files = [];
 
     if (!req.files && req.files.length > 0) {
