@@ -7,20 +7,50 @@ const listRecord = async (req, res) => {
     res.json(records);
   } catch (err) {
     res.json({ error: err.message });
-  }
+  };
 };
 
+//MUST TEST
 const createRecord = async (req, res) => {
   try {
-    const newData = req.body;
-    const record = new Donations(newData);
+    const { item, type, quantity } = req.body;
+    const newRecord = new Donations({
+      donor: req.session.userId,
+      item,
+      type,
+      quantity
+    });
 
-    await record.save();
 
-    res.json(record);
+    const files = [];
+
+    if (!req.files && req.files.length > 0) {
+      for (const file of req.files){
+        const b64 = Buffer.from(file.buffer).toString("base64");
+
+        const dataURI = `data:${file.mimetype};base64,${b64}`;
+
+        const result = await cloudinary.uploader.upload(dataURI, {
+          folder: "donations",
+          resource_type: "auto",
+        });
+
+        files.push({
+          url: result.secure_url,
+          publicId: result.public_id,
+          format: result.format
+        });
+      };
+    };
+
+    newRecord.photo = files;
+
+    await newRecord.save();
+    res.status(201).json(newRecord);
+
   } catch (err) {
     res.json({ error: err.message });
-  }
+  };
 };
 
 const readRecord = async (req, res) => {
@@ -35,7 +65,7 @@ const readRecord = async (req, res) => {
     res.json(record);
   } catch (err) {
     res.json({ error: err.message });
-  }
+  };
 };
 
 const updateRecord = async (req, res) => {
@@ -48,7 +78,7 @@ const updateRecord = async (req, res) => {
     res.json(record);
   } catch (err) {
     res.json({ error: err.message });
-  }
+  };
 };
 
 const deleteRecord = async (req, res) => {
@@ -60,7 +90,7 @@ const deleteRecord = async (req, res) => {
     res.json({ message: "Successfully deleted!" });
   } catch (err) {
     res.json({ error: err.message });
-  }
+  };
 };
 
 export { listRecord, createRecord, readRecord, updateRecord, deleteRecord };

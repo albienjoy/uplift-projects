@@ -7,7 +7,7 @@ const listRecord = async (req, res) => {
     res.json(records);
   } catch (err) {
     res.json({ error: err.message });
-  }
+  };
 };
 
 const createRecord = async (req, res) => {
@@ -20,7 +20,7 @@ const createRecord = async (req, res) => {
     res.json(record);
   } catch (err) {
     res.json({ error: err.message });
-  }
+  };
 };
 
 const readRecord = async (req, res) => {
@@ -35,7 +35,7 @@ const readRecord = async (req, res) => {
     res.json(record);
   } catch (err) {
     res.json({ error: err.message });
-  }
+  };
 };
 
 const updateRecord = async (req, res) => {
@@ -48,7 +48,7 @@ const updateRecord = async (req, res) => {
     res.json(record);
   } catch (err) {
     res.json({ error: err.message });
-  }
+  };
 };
 
 const deleteRecord = async (req, res) => {
@@ -60,7 +60,7 @@ const deleteRecord = async (req, res) => {
     res.json({ message: "Successfully deleted!" });
   } catch (err) {
     res.json({ error: err.message });
-  }
+  };
 };
 
 export { listRecord, createRecord, readRecord, updateRecord, deleteRecord };
