@@ -12,6 +12,6 @@ const schema = new mongoose.Schema({
         timestamps: true
     });
 
-const Address = mongoose.model("address", schema);
+const Addresses = mongoose.model("address", schema);
 
-export default Address;
+export default Addresses;
