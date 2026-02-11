@@ -5,16 +5,18 @@ import {
   createRecord,
   readRecord,
   updateRecord,
-  deleteRecord,
+  hardDeleteRecord,
+  softDeleteRecord,
 } from "../controllers/donationController.js";
-import { isAllowed } from "../middlewares/authMiddleware.js";
+import { isAllowed, isAuthenticated } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
 router.get("/donation", listRecord);
-router.post("/donation", upload.array("files", 10), isAllowed, createRecord);
+router.post("/donation", isAuthenticated, createRecord);
 router.get("/donation/:id", readRecord);
 router.put("/donation/:id", updateRecord);
-router.delete("/donation/:id", deleteRecord);
+router.delete("/donation/:id", hardDeleteRecord);
+router.post("/donation/:id", softDeleteRecord);
 
 export default router;

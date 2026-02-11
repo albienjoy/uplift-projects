@@ -6,14 +6,14 @@ import {
   updateRecord,
   deleteRecord,
 } from "../controllers/addressController.js";
-import { isAllowed } from "../middlewares/authMiddleware.js";
+import { isAllowed, isAuthenticated } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
 router.get("/address", listRecord);
-router.post("/address", isAllowed, createRecord);
-router.get("/address/:id", isAllowed, readRecord);
-router.put("/addess/:id", isAllowed, updateRecord);
-router.delete("/address/:id", isAllowed, deleteRecord);
+router.post("/address", isAuthenticated, createRecord);
+router.get("/address/:id", isAuthenticated, readRecord);
+router.put("/addess/:id", isAuthenticated, updateRecord);
+router.delete("/address/:id", isAuthenticated, deleteRecord);
 
 export default router;
