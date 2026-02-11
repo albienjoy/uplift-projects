@@ -12,11 +12,6 @@ const schema = new mongoose.Schema(
     item: { type: String, required: true },
     type: { type: String, required: true },
     quantity: { type: Number, required: true },
-    photo: [{
-        url: String,
-        publicId: String, //needed for cloudinary kaya need ilagay
-        format: String,
-    }],
     deletedAt: {
   "type": ["string", "null"]
 }

@@ -31,6 +31,10 @@ const registerAnchor = document.querySelector("#registration-anchor");
 const logoutAnchor = document.querySelector("#logout-anchor");
 const homeAnchor = document.querySelector("#home-anchor");
 
+//list part
+const listContainer = document.querySelector("#list-container");
+//manipoulat this so all listed items appear
+
 //button anchors dashboard
 const donationAnchor = document.querySelector("#donate-btn-anchor");
 const listAnchor = document.querySelector("#list-btn-anchor");
@@ -69,6 +73,8 @@ const loginEndpoint = "http://localhost:5555/api/login";
 const logoutEndpoint = "http://localhost:5555/api/logout";
 const donationEndpoint = "http://localhost:5555/api/donation";
 const addressEndpoint = "http://localhost:5555/api/address";
+const listDonationEndpoint = "http://localhost:5555/api/donation";
+
 
 let isLoggedIn = false;
 
@@ -218,14 +224,17 @@ const postData = async (url, data, sectionId) => {
     });
 
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
       submissionStatusMessage.innerHTML = "Oops! Please try again."
-    }
+           throw new Error(`HTTP error! Status: ${response.status}`);
+    };
 
     const responseData = await response.json();
     console.log("Success:", responseData);
     // return responseData; //DO I NEED TO RETURN THIS DATA?
-
+    if (!responseData) {
+      submissionStatusMessage.innerHTML = "Oops! Please try again."
+           throw new Error(`HTTP error! Status: ${response.status}`);
+    };
     
   } catch (error) {
     console.error("POST error:", error);
@@ -304,15 +313,51 @@ addressBtn.addEventListener ("click", (event) => {
 
   } catch(err){
   console.log("error", err);
+    }; 
+});
 
-    }
 
-    if (err) {
-  submissionStatusMessage.innerHTML = "Oops. Please try again."
-    }
+//build this after building list
+deleteBtn.addEventListener("click", () => { //needs the ID @_@
+  try {
+
+  }catch(err){
+  console.log("error", err);
+    }; 
 })
 
-
-deleteBtn.addEventListener
-
 updateBtn
+
+listAnchor.addEventListener("click", async () => {
+navigate(listSection);
+
+try {
+const response = await fetch(listDonationEndpoint, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+     throw new Error(`HTTP error! Status: ${response.status}`);
+    };
+
+    const donations = await response.json();
+    console.log("Success:", donations);
+
+    if (!donations) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    };
+    
+    donations.forEach(item => {
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `${item.item} - ${item.type} - ${item.quantity}`;
+            console.log(listItem);
+            listContainer.appendChild(listItem);
+        });
+
+}catch(err){
+  console.log("error", err);
+    }; 
+});

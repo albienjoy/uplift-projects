@@ -58,7 +58,7 @@ const logout = (req, res) => {
 
     res.clearCookie("connect.sid");
     res.json({ message: "Logged out successfully" });
-    console.log("logged out") //DELETE
+
   } catch (err) {
     res.json({ error: err.message });
   }

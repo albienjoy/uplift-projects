@@ -2,7 +2,7 @@ import Addresses from "../models/addressModel.js";
 
 const listRecord = async (req, res) => {
   try {
-    const records = await Addresses.find().populate("user");
+    const records = await Addresses.find().populate("username");
 
     res.json(records);
   } catch (err) {
@@ -33,12 +33,14 @@ const readRecord = async (req, res) => {
     const record = await Addresses.findById(id).populate("username");
 
     if (!record) {
-      res.json({ error: "Record not found" });
+      res.status(404).json({ error: "Record not found" });
       return;
     }
     res.json(record);
   } catch (err) {
-    res.json({ error: err.message });
+    res.json({ 
+      status: 403,
+      error: err.message });
   };
 };
 
@@ -48,10 +50,11 @@ const updateRecord = async (req, res) => {
     const newData = req.body;
 
     const record = await Addresses.findByIdAndUpdate(id, newData);
+    console.log(id, newData)
 
     res.json(record);
   } catch (err) {
-    res.json({ error: err.message });
+    res.json({ status: 403, error: err.message });
   };
 };
 
@@ -63,7 +66,7 @@ const deleteRecord = async (req, res) => {
 
     res.json({ message: "Successfully deleted!" });
   } catch (err) {
-    res.json({ error: err.message });
+    res.json({ status: 403, error: err.message });
   };
 };
 

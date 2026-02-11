@@ -1,5 +1,4 @@
 import express from "express";
-import upload from "../middlewares/uploadMiddleware.js";
 import {
   listRecord,
   createRecord,
