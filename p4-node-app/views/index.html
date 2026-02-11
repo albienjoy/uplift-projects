@@ -1,14 +1,161 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Donation App</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tagpi</title>
+
+    <script src="app.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div id="username-container" class="hidden"></div>
+      <div id="logout-container" class="hidden">
+        <a href="#logout-section" id="logout-anchor">Log out
+        </a>
+        </div>
+        <div> <a href="#home-section" id="home-anchor">Home</a> </div>
+    </header>
+
+    <section id="home-section">
+      <h1>Welcome!</h1>
+      <h2>New to Tagpi?</h2>
+      <a href="#registration-section" id="registration-anchor">Register here</a>
+      <h2>Already have an account?</h2>
+      <a href="#login-section" id="login-anchor">
+        Log in
+      </a>
+
+    </section>
+
+    <section id="registration-section" class="hidden">
+      <h2>Register</h2>
+      <form class="registration-form">
+        <h3>name:</h3>
+        <input id="name" />
+        <h3>username:</h3>
+        <input id="username" />
+        <h3>email:</h3>
+        <input id="email" />
+        <h3>contact number:</h3>
+        <input id="contactNum" />
+        <h3>password:</h3>
+        <input id="password" type="password"/>
+
+        <button type="submit" id="registration-btn">Submit</button>
+      </form>
+      <h3 class="submission-status-msg"></h3>
+      
+      <h2>Already have an account?</h2>
+      <a href="#login-section" id="login-anchor">Log in</a>
+    </section>
+
+    <section id="login-section" class="hidden">
+      <h2>Log in</h2>
+      <form>
+        <h3>Username:</h3>
+        <input id="login-username" />
+        <h3>Password:</h3>
+        <input id="login-password" type="password"/>
+
+        <button type="submit" id="login-btn">Submit</button>
+      </form>
+      <h4 id="registration-error"></h4>
+
+      <h3>New to Tagpi?</h3>
+      <a href="#registration-section" id="registration-anchor">Register here</a>
+    </section>
+
+    <section id="dashboard-section" class="hidden">
+      
+      <h2>Dashboard</h2>
+      <h2>Welcome</h2>
+
+      <div id="user-profile">
+        Update details
+                <button id="user-details-btn-anchor">Update</button>
+      </div>
+
+      <div class="donate-card">
+        Make a new donation
+        <button id="donate-btn-anchor">Donate</button>
+      </div>
+
+      <div class="list-card">
+        See previous donations
+        <button id="list-btn-anchor">Enter</button>
+      </div>
+    </section>
+
+    <section id="user-section" class="hidden">
+
+      <h2>Add pick-up adress</h2>
+            <form class="addresss-form">
+        <h3>House number:</h3>
+        <input id="house-number" />
+        <h3>Street:</h3>
+        <input id="street" />
+        <h3>Barangay:</h3>
+        <input id="barangay" />
+        <h3>City:</h3>
+        <input id="city" />
+        <h3>Province:</h3>
+        <input id="province" />                
+        <h3>Zip code:</h3>
+        <input id="zip-code" />   
+        <button type="submit" id="address-btn">Submit</button>
+      </form>
+      <h3 class="submission-status-msg"></h3>
+    </section>
+
+    <section id="donation-section" class="hidden">
+      <h2>Donate</h2>
+      <form id="donation-form">
+        <h3>Item:</h3>
+        <p>Describe your item</p>
+        <input id="item" />
+        <h3>Type:</h3>
+        <p>Choose from the options below</p>
+        <input id="item-type" />
+        <h3>Quantity:</h3>
+        <input id="item-quantity" />
+        <button type="submit" id="donate-btn">Submit</button>
+      </form>
+            <h3 class="submission-status-msg"></h3>
+
+      <div id="donation-success-overlay" class="overlay hidden">
+        <div id="success-box" class="overlay-box">
+          <h2>Your donation was successful</h2>
+          <button id="donate-again-btn" class="overlay hidden">
+            Donate again
+          </button>
+          <button id="return-btn" class="overlay hidden">
+            Back to the dashboard
+          </button>
+        </div>
+
+      </div>
 
 
+    </section>
 
-</head>
-<body>
-    
-</body>
+    <section id="list-section" class="hidden">
+      <div class="list-container">
+        <div class="update-card">
+          <button id="update-btn">Update</button>
+        </div>
+
+        <div class="delete-card">
+          <button id="delete-btn">Delete</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="logout-section" class="hidden">
+      <div>
+Successfully logged out yehey
+      </div>
+    </section>
+  </body>
 </html>

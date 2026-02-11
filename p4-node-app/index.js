@@ -6,6 +6,7 @@ import cors from "cors";
 import helmet from "helmet";
 import limiterConfig from "./configs/limiter.js";
 import connectDB from "./configs/db.js";
+import multer from "multer";
 
 import userRoutes from "./routes/userRoutes.js";
 import donationRoutes from "./routes/donationRoutes.js";
@@ -19,7 +20,7 @@ const app = express();
 app.use(limiterConfig);
 app.use(helmet());
 app.use(cors());
-app.use(express.json());
+app.use(express.json()); //updated this
 app.use(
     session({
         secret: process.env.SESSION_SECRET,
@@ -39,4 +40,14 @@ app.use("/api", userRoutes);
 app.use("/api", donationRoutes);
 app.use("/api", addressRoutes);
 
-app.listen(PORT, () => {console.log(`App is running at http://localhost:${PORT}`)})
+
+// //DELETE BEFORE SUBMITTING -- FOR MULTER DEBUGGING
+// app.use((error, req, res, next) => {
+//   if (error instanceof multer.MulterError) {
+//     console.log('This is the rejected field ->', error.field);
+//   }
+//   // Handle other errors or continue
+// });
+
+
+app.listen(PORT, () => {console.log(`App is running at http://localhost:${PORT}`)});
