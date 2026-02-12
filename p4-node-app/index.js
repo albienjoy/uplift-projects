@@ -41,13 +41,4 @@ app.use("/api", donationRoutes);
 app.use("/api", addressRoutes);
 
 
-// //DELETE BEFORE SUBMITTING -- FOR MULTER DEBUGGING
-// app.use((error, req, res, next) => {
-//   if (error instanceof multer.MulterError) {
-//     console.log('This is the rejected field ->', error.field);
-//   }
-//   // Handle other errors or continue
-// });
-
-
 app.listen(PORT, () => {console.log(`App is running at http://localhost:${PORT}`)});

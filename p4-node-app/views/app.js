@@ -189,7 +189,7 @@ const registerUser = async (data) => {
 
 const loginUser = async (data) => {
   try{
-        const response = await fetch(loginEndpoint, {
+      const response = await fetch(loginEndpoint, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -315,18 +315,6 @@ addressBtn.addEventListener ("click", (event) => {
   console.log("error", err);
     }; 
 });
-
-
-//build this after building list
-deleteBtn.addEventListener("click", () => { //needs the ID @_@
-  try {
-
-  }catch(err){
-  console.log("error", err);
-    }; 
-})
-
-updateBtn
 
 listAnchor.addEventListener("click", async () => {
 navigate(listSection);

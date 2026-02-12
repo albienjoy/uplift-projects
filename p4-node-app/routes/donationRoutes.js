@@ -12,7 +12,7 @@ import { isAllowed, isAuthenticated } from "../middlewares/authMiddleware.js";
 const router = express.Router();
 
 router.get("/donation", listRecord);
-router.post("/donation", isAuthenticated, createRecord);
+router.post("/donation", isAllowed, createRecord);
 router.get("/donation/:id", readRecord);
 router.put("/donation/:id", updateRecord);
 router.delete("/donation/:id", hardDeleteRecord);

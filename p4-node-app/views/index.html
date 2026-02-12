@@ -7,6 +7,14 @@
 
     <script src="app.js" defer></script>
     <link rel="stylesheet" href="style.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=TikTok+Sans:opsz,wght@12..36,300..900&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Texturina:ital,opsz,wght@0,12..72,100..900;1,12..72,100..900&display=swap" rel="stylesheet">
   </head>
   <body>
     <header>
@@ -15,17 +23,34 @@
         <a href="#logout-section" id="logout-anchor">Log out
         </a>
         </div>
-        <div> <a href="#home-section" id="home-anchor">Home</a> </div>
+        <div> <a href="#home-section" id="home-anchor"><img src="tagpi.png" id="logo"></a> </div>
+        
     </header>
 
     <section id="home-section">
-      <h1>Welcome!</h1>
-      <h2>New to Tagpi?</h2>
-      <a href="#registration-section" id="registration-anchor">Register here</a>
+      <div class="split-text-container">
+    <span class="text-part left">walang </span>
+    <span class="text-part right">     sayang</span>
+</div>
+            <div id="img-container"><img src="2.png" id="cardboard-img">
+
+
+            <div class="intro-copy">
+      <p>Need to declutter? Kami na'ng bahala!
+      We can collect your donation from your doorstep to breathe new life into them. </p>
+      <p> Sign in. Donate. Wait.</p>
+      <p><strong>Sa amin, madali lang. Sa amin, walang sayang.</strong></p>
+            </div>
+            </div>
+
+<div id="home-text">
+      <h2>New here?</h2>
+
       <h2>Already have an account?</h2>
-      <a href="#login-section" id="login-anchor">
-        Log in
-      </a>
+      <a href="#registration-section" id="registration-anchor">Register</a>
+      <a href="#login-section" id="login-anchor">Log in</a>
+
+</div>
 
     </section>
 
@@ -45,7 +70,7 @@
 
         <button type="submit" id="registration-btn">Submit</button>
       </form>
-      <h3 class="submission-status-msg">xxx</h3>
+      <h3 class="submission-status-msg"></h3>
 
       <h2>Already have an account?</h2>
       <a href="#login-section" id="login-anchor">Log in</a>
@@ -91,7 +116,7 @@
     <section id="user-section" class="hidden">
 
       <h2>Add pick-up adress</h2>
-            <form class="addresss-form">
+        <form class="addresss-form">
         <h3>House number:</h3>
         <input id="house-number" />
         <h3>Street:</h3>
@@ -124,20 +149,6 @@
       </form>
             <h3 class="submission-status-msg"></h3>
 
-      <div id="donation-success-overlay" class="overlay hidden">
-        <div id="success-box" class="overlay-box">
-          <h2>Your donation was successful</h2>
-          <button id="donate-again-btn" class="overlay hidden">
-            Donate again
-          </button>
-          <button id="return-btn" class="overlay hidden">
-            Back to the dashboard
-          </button>
-        </div>
-
-      </div>
-
-
     </section>
 
     <section id="list-section" class="hidden">
@@ -161,9 +172,12 @@
     </section>
 
     <section id="logout-section" class="hidden">
-      <div>
-Successfully logged out yehey
+      <div> Successfully logged out!
       </div>
     </section>
+
+    <footer>
+      <a href="README.md"></a>
+    </footer>
   </body>
 </html>
