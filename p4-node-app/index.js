@@ -6,7 +6,6 @@ import cors from "cors";
 import helmet from "helmet";
 import limiterConfig from "./configs/limiter.js";
 import connectDB from "./configs/db.js";
-import multer from "multer";
 
 import userRoutes from "./routes/userRoutes.js";
 import donationRoutes from "./routes/donationRoutes.js";

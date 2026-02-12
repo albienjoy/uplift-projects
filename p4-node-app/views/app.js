@@ -152,15 +152,6 @@ userDetailsAnchor.addEventListener("click", () => {
   navigate(userSection);
 });
 
-donateAgainBtn.addEventListener("click", () => {
-  navigate(donationSection);
-});
-
-returnBtn.addEventListener("click", () => {
-  navigate(dashboardSection);
-});
-
-
 //functions
 const registerUser = async (data) => {
   try {
@@ -271,28 +262,28 @@ try {
     };
 
     loginUser(loginData);
-    window.location.hash = "#dashboard-section"
+    navigate(dashboardSection);
   } catch(err){
   console.log("error", err);
     };
 });
 
-donateBtn.addEventListener("click", (event)=>{
-  try {
-    event.preventDefault();
+// donateBtn.addEventListener("click", (event)=>{
+//   try {
+//     event.preventDefault();
 
-    const newDonation = {
-      item: donationItem.value,
-      type: donationType.value,
-      quantity: donationQuantity.value
-    };
+//     const newDonation = {
+//       item: donationItem.value,
+//       type: donationType.value,
+//       quantity: donationQuantity.value
+//     };
 
-    postData(donationEndpoint, newDonation);
-    window.location.hash = "#dashboard-section"
-  } catch(err){
-  console.log("error", err);
-    }
-});
+//     postData(donationEndpoint, newDonation);
+//     window.location.hash = "#dashboard-section"
+//   } catch(err){
+//   console.log("error", err);
+//     }
+// });
 
 
 addressBtn.addEventListener ("click", (event) => {

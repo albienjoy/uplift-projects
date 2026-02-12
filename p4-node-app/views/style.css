@@ -13,6 +13,7 @@ body {
 
 
 header {
+  
     display: flex;
     justify-content: center;
     align-items: center;
@@ -61,7 +62,8 @@ h2 {
 }
 
 h3 {
-    font-size: .8em;
+    font-size: 1em;
+    color: #fafbf9;
 }
 
 a {
@@ -101,13 +103,14 @@ a {
 
 #cardboard-img {
   height: 30em;
-  width: 100%;
+  width: 70%;
 }
 
 #home-text {
   display: grid;
   grid-template-columns: 1fr 1fr;
-
+  margin-bottom: 15em;
+  margin-top: -1em;
 }
 
 .split-text-container {
@@ -160,4 +163,19 @@ a {
     100% {
         transform: translateX(0);
     }
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #212f6f;;
+  color: white;
+  text-align: center;
+  padding-bottom: 1em;
+}
+
+section {
+  color: #fafbf9;
 }
