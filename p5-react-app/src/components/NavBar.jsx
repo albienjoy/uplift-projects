@@ -31,6 +31,8 @@ export const NavBar = () => {
             <img src={logo} className="w-40 m-auto" />
             </Link>
             </div>
+            
+            
     );
   };
 

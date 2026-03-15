@@ -14,7 +14,14 @@ export const Home = () => {
 
         <Link to="/register"> <b className="text-lime">Register.</b>
         </Link>
+
+        <div className="mt-20">
+                <a href="https://medium.com/@albien.joy/how-i-built-a-react-running-app-in-7-days-bbced7f207e3" className="text-center text-silver m-auto mt-10">How I made this</a>
+
         </div>
+
+        </div>
+
         </div>
 
         </div>
