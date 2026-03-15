@@ -3,22 +3,21 @@ import { useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
 
 export const EditActivity = () => {
-  const notifySuccess = () => toast.success("Activity uploaded successfully!");  
-  const {id} = useParams()  
+  const notifySuccess = () => toast.success("Activity uploaded successfully!");
+  const { id } = useParams();
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const [files, setFiles] = useState([]);
   const navigate = useNavigate();
 
-const endpoint = "http://localhost:9876/api/post/" + id;
-console.log(endpoint)
+  const endpoint = "http://localhost:9876/api/post/" + id;
+
   const activityTypeOptions = [
     { value: "walk", label: "Walk" },
     { value: "run", label: "Run" },
     { value: "trailRun", label: "Trail run" },
     { value: "hike", label: "Hike" },
   ];
-
 
   const [formData, setFormData] = useState({
     activityName: "",
@@ -31,12 +30,10 @@ console.log(endpoint)
     elevGain: "",
   });
 
-    const getActivityLabel = (value) => {
-    const option = activityTypeOptions.find(
-        (item) => item.value === value
-    );
+  const getActivityLabel = (value) => {
+    const option = activityTypeOptions.find((item) => item.value === value);
     return option ? option.label : value;
-  }
+  };
 
   const handleChange = (event) => {
     setFormData({
@@ -70,7 +67,7 @@ console.log(endpoint)
       });
 
       const data = await response.json();
-console.log(data);
+
       const id = data.id;
 
       if (response.ok) {
@@ -83,33 +80,31 @@ console.log(data);
     }
   };
 
-useEffect(() => {
+  useEffect(() => {
     const fetchOriginalData = async () => {
-    try{
-      const response = await fetch(endpoint, {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      try {
+        const response = await fetch(endpoint, {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
-      const result = await response.json();
-      setData(result);
-      console.log(typeof result)
-
-    }catch(error){
-      setError("Error loading data")
+        const result = await response.json();
+        setData(result);
+        console.log(typeof result);
+      } catch (error) {
+        setError("Error loading data");
+      }
     };
-    }
 
     fetchOriginalData();
-
-}, []);
-
+  }, []);
 
   if (error) return <div>{error}</div>;
   if (!data) return <div>Loading...</div>;
+
   return (
     <>
       <h1> Edit activity </h1>
@@ -138,10 +133,20 @@ useEffect(() => {
         </select>
 
         <label>Date:</label>
-        <input name='date' placeholder='Date' onChange={handleChange} defaultValue={data.date} />
+        <input
+          name='date'
+          placeholder='Date'
+          onChange={handleChange}
+          defaultValue={data.date}
+        />
 
         <label>Distance:</label>
-        <input name='distance' placeholder='Distance' onChange={handleChange} defaultValue={data.activityType} />
+        <input
+          name='distance'
+          placeholder='Distance'
+          onChange={handleChange}
+          defaultValue={data.activityType}
+        />
 
         <label>Total time:</label>
         <input
@@ -152,7 +157,11 @@ useEffect(() => {
         />
 
         <label>Description:</label>
-        <textarea name='description' onChange={handleChange} defaultValue={data.description} />
+        <textarea
+          name='description'
+          onChange={handleChange}
+          defaultValue={data.description}
+        />
 
         <label>Upload photos:</label>
         <input type='file' multiple onChange={handleFileChange} />

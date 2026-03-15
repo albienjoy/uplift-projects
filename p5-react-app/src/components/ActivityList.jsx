@@ -1,47 +1,38 @@
 import { Link } from "react-router";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useFetch } from "../hooks/useFetch";
+import { activityTypeOptions } from "../constants/activityTypes";
+import { useState, useEffect } from "react";
 
 export const ActivityList = () => {
-
-  const listEndpoint = "http://localhost:9876/api/post";
-
-  const [data, setData] = useState([]);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const activityTypeOptions = [
-    {value: "walk", label: "Walk"},
-    {value: "run", label: "Run"},
-    {value: "trailRun", label: "Trail run"},
-    {value: "hike", label: "Hike"}
-  ];
+  const { data, loading, error } = useFetch("http://localhost:9876/api/post");
+  const [activities, setActivities] = useState([]);
 
   useEffect(() => {
-    
-    const fetchData = async () => {
+    if (data) {
+      setActivities(data);
+    }
+  }, [data]);
+
+  const handleDelete = async (id) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this activity?",
+    );
+
+    if (!confirmed) return;
+
     try {
-      const response = await fetch(listEndpoint, {
-        method: "GET",
+      const response = await fetch("http://localhost:9876/api/post/" + id, {
+        method: "DELETE",
         credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
       });
 
-      const result = await response.json();
-      setData(result);
-
       if (response.ok) {
-        setLoading(false);
+        setActivities((prev) => prev.filter((item) => item._id !== id));
       }
     } catch (error) {
-      setError(error);
-    } finally {
-      setLoading(false);
+      console.log(error);
     }
   };
-    
-    fetchData()}, [])
 
   if (loading) {
     return <div>Loading data</div>;
@@ -52,32 +43,56 @@ export const ActivityList = () => {
   }
 
   const getActivityLabel = (value) => {
-    const option = activityTypeOptions.find(
-        (item) => item.value === value
-    );
+    const option = activityTypeOptions.find((item) => item.value === value);
     return option ? option.label : value;
-  }
+  };
 
   return (
     <>
-      <div>{data.map((activity) => (
+      <div>
+        {activities.map((activity) => (
+          <div key={activity._id}>
+            <div className='border-1 border-lime rounded-2xl p-4 pl-10 m-5'>
+              <div className='heading-style'>{activity.activityName}</div>
+              <div>
 
-        <div key={activity._id}>
-        <h2>{activity.activityName}</h2>
-        <div>{activity.date} kms</div>
-        <div>{getActivityLabel(activity.activityType)}</div>
-        <div>{activity.distance} kms</div>
-        <div>{activity.gear}</div>
-        <div>{activity.elevGain}</div>
-        <div>{activity.files?.map((file) => (
-  <img key={file._id} src={file.url} alt="activity"/>
-))}</div>
+              <div className='bg-lime w-20 text-center my-1'>
+                {getActivityLabel(activity.activityType)}
+              </div>
+              <div>{new Date(activity.date).toLocaleDateString("en-US", {
+                  month: "long",
+                  day: "2-digit",
+                  year: "numeric",
+                })}</div>
+              <div><b>Distance: </b>{activity.distance} kms</div>
+              <div>{activity.gear}</div>
+              <div>{activity.elevGain}</div>
+              <div className='w-6/7 h-100 my-3 overflow-hidden rounded-lg'>
+                {activity.files?.map((file) => (
+                  <img
+                    key={file._id}
+                    src={file.url}
+                    alt='activity'
+                    className='w-full h-full object-cover'
+                  />
+                ))}
+                </div>
+              </div>
 
-        <Link to={`/profile/${activity._id}`}>
-        <button>View</button>
-        </Link>
-        </div>
-      ))}
+              <div className=''>
+                <Link to={`/profile/${activity._id}`}>
+                  <button className='button-style'>View</button>
+                </Link>
+                <button
+                  className='button-style'
+                  onClick={() => handleDelete(activity._id)}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     </>
   );

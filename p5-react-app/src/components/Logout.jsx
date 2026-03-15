@@ -1,6 +1,5 @@
-//this has the logout button
 import { useNavigate } from "react-router";
-import { useEffect } from "react";
+import logoutIcon from "../assets/logout.png";
 
 export const Logout = () => {
   const logoutEndpoint = "http://localhost:9876/api/auth/logout";
@@ -27,7 +26,7 @@ export const Logout = () => {
 
   return (
     <>
-      <button onClick={handleLogout}>Log out</button>
+      <button className="flex text-silver" onClick={handleLogout}><img src={logoutIcon} className="w-7"/> Log out</button>
     </>
   );
 };

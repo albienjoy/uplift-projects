@@ -1,24 +1,11 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router";
+import {activityTypeOptions} from "../constants/activityTypes";
+import { useFetch } from "../hooks/useFetch";
+import { ActivityCount } from "../components/ActivityCount";
 
 export const ActivityDetails = () => {
-  //this page should display the activity based on the param in the URL
-  //this should use the read endpoint
-
     const { id } = useParams();
-    const [data, setData] = useState(null);
-    const [error, setError] = useState(null);
-      const [loading, setLoading] = useState(true);
-  //note: optimize -- usecontext or usereducer
-
-    const readEndpoint = ("http://localhost:9876/api/post/" + id);
-    const activityTypeOptions = [
-      {value: "walk", label: "Walk"},
-      {value: "run", label: "Run"},
-      {value: "trailRun", label: "Trail run"},
-      {value: "hike", label: "Hike"}
-    ];
     const getActivityLabel = (value) => {
       const option = activityTypeOptions.find(
           (item) => item.value === value
@@ -26,54 +13,38 @@ export const ActivityDetails = () => {
       return option ? option.label : value;
     }
 
-  useEffect(() => {
-    const fetchOriginalData = async () => {
-    try{
-      const response = await fetch(readEndpoint, {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      const result = await response.json();
-      setData(result);
-      console.log(typeof result)
-    }catch(error){
-      setError("Error loading data")
-    };
-    }
-
-    fetchOriginalData();
-
-}, []);
+    const { data, error } = useFetch("http://localhost:9876/api/post/" + id);
   if (error) return <div>{error}</div>;
   if (!data) return <div>Loading...</div>;
 
-
-
-
-
   return (
     <>
-      Activity Details
       <div>
-        <div>{data.activityName}</div>
-        <div>{getActivityLabel(data.activityType)}</div>
-        <div>{data.date}</div>        
-        <div>{data.distance} kms</div>
-        <div>{data.gear}</div>
-        <div>{data.elevGain}</div>
-        <div>{data.files?.map((file) => (
-  <img key={file._id} src={file.url} alt="activity"/>
-))}</div>
-        <Link to={`/edit/${data._id}`}>
-        <button>Edit</button>
-        </Link>
-
+        <div className="m-6">
+          <div className="heading-style">{data.activityName}</div>
+          <div className="bg-lime w-20bg-lime w-20 text-center my-1">{getActivityLabel(data.activityType)}</div>
+          <div>{new Date(data.date).toLocaleDateString("en-US", {
+                  month: "long",
+                  day: "2-digit",
+                  year: "numeric",
+                })}</div>        
+          <div>{data.distance} kms</div>
+          <div>{data.gear}</div>
+          <div>{data.elevGain}</div>
+          <div className="w-2/3 h-5/6 overflow-hidden object-cover rounded-2xl">{data.files?.map((file) => (
+              <img key={file._id} src={file.url} alt="activity"/>
+            ))}</div>
+          <Link to={`/edit/${data._id}`}>
+          <button className="button-style">Edit</button>
+          </Link>
+        </div>
       </div>
 
+    <div className="grid grid-cols-2">
+      <div className="fixed h-full w-full top-0 left-6/8 bg-silver pt-20 z-9">
+        <ActivityCount />
+      </div>
+    </div>
     </>
   );
 };
