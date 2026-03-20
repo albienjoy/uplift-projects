@@ -19,29 +19,21 @@ export const Dashboard = () => {
     return <div>Error displaying data. </div>;
   }
 
-
   return (
     <>
-    <div className="grid grid-cols-2">
-      <div className="fixed h-full w-full top-0 left-6/8 bg-silver pt-20 z-9">
+      <div>
         <ActivityCount />
       </div>
-    </div>
 
-    <div className="w-5/7">
-      <div className="m-5 mb-20 bg-lime-100/50 w-full h-140">
-        <div className="w-9/10 m-auto pt-10">
+      <div className='mb-20 bg-lime-100/50 w-full h-140'>
+        <div className='w-9/10 m-auto pt-10'>
           <Charts />
         </div>
       </div>
 
-      <div className="m-5">
-      <ActivityList />
+      <div className='m-5'>
+        <ActivityList />
       </div>
-    </div>
-
-
-      
     </>
   );
 };

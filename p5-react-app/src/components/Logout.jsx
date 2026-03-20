@@ -26,7 +26,9 @@ export const Logout = () => {
 
   return (
     <>
-      <button className="flex text-silver" onClick={handleLogout}><img src={logoutIcon} className="w-7"/> Log out</button>
+      <button className='flex text-silver sm:text-xs' onClick={handleLogout}>
+        Log out
+      </button>
     </>
   );
 };

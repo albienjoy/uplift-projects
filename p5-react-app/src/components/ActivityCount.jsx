@@ -28,44 +28,64 @@ export const ActivityCount = () => {
 
       return acc;
     },
-    { count: {}, distance: {}},
+    { count: {}, distance: {} },
   );
-    console.log(stats)
-
-
 
   return (
     <>
+      <div className='grid grid-cols-3 w-full m-3'>
+        <div>
+          <div className='heading-style'>
+            {" "}
+            <img src={statIcon} className='w-10 mr-2' /> Weekly stats
+          </div>
+          <p className='subheading-style'>Activity count</p>
+          <p>
+            <b>Run:</b> {stats.count.run}{" "}
+          </p>
+          <p>
+            <b>Hike:</b> {stats.count.hike}{" "}
+          </p>
+          <p>
+            <b>Trail run:</b> {stats.count.trailRun}{" "}
+          </p>
+          <p>
+            <b>Walk:</b> {stats.count.walk}{" "}
+          </p>
+        </div>
 
-    <div className="w-full m-10">
- 
-      <div className="flex items-center heading-style"> <img src={statIcon} className="w-10 mr-2" /> Weekly stats</div>
-      <div className="mb-5">
-      <p className="subheading-style">Activity count</p>
-      <p><b>Run:</b> {stats.count.run} </p>
-      <p><b>Hike</b> {stats.count.hike} </p>
-      <p><b>Trail run</b> {stats.count.trailRun} </p>
-      <p><b>Walk:</b> {stats.count.walk} </p>
+        <div className='pt-18'>
+          <p className='subheading-style'>Mileage</p>
+          <p>
+            <b>Run:</b> {stats.distance.run}km{" "}
+          </p>
+          <p>
+            <b>Hike:</b> {stats.distance.hike}km{" "}
+          </p>
+          <p>
+            <b>Trail run:</b> {stats.distance.trailRun}km{" "}
+          </p>
+          <p>
+            <b>Walk:</b> {stats.distance.walk}km{" "}
+          </p>
+        </div>
+
+        <div>
+          <div className='heading-style'>
+            <img src={bestIcon} className='w-10 mr-2' />
+            Personal bests
+          </div>
+          <p>
+            <b>5k:</b> 29:52:09
+          </p>
+          <p>
+            <b>10k:</b> 1:04:56
+          </p>
+          <p>
+            <b>21k:</b> 29:52
+          </p>
+        </div>
       </div>
-
-      <div className="mb-5">
-      <p className="subheading-style">Mileage</p>
-      <p><b>Run:</b> {stats.distance.run}km </p>
-      <p><b>Hike:</b> {stats.distance.hike}km </p>
-      <p><b>Trail run:</b> {stats.distance.trailRun}km </p>
-      <p><b>Walk:</b> {stats.distance.walk}km </p>
-      </div>
-
-      <div className="flex items-center heading-style">
-        <img src={bestIcon} className="w-10 mr-2" /> 
-        Personal bests</div>
-      <p><b>5k:</b> 29:52:09</p>
-      <p><b>10k:</b> 1:04:56</p>
-      <p><b>21k:</b> 29:52</p>
-
-
-    </div>
-
     </>
   );
 };

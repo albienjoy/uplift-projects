@@ -46,49 +46,58 @@ export const Register = () => {
 
   return (
     <>
-    <div className="relative w-full h-screen m-auto">
-      <img src={registerphoto} className="w-full h-full overflow-hidden object-cover" />
-      <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-slate-500/10 backdrop-blur-xs w-140 m-auto border-2 border-lime rounded-4xl p-5 ml-5'>
-        <form onSubmit={handleSubmit} className="m-auto p-6 text-lead ">
-          <div className='grid grid-cols-[8em_1fr]'>
-            <label className="font-bold mt-5">Name</label>
-            <input name='name' type='text' onChange={handleChange} className="input-style bg-lime-50/50 w-75" />
+      <div className='relative w-full h-screen m-auto'>
+        <img
+          src={registerphoto}
+          className='w-full h-full overflow-hidden object-cover'
+        />
+        <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-slate-500/10 backdrop-blur-xs w-140 m-auto border-2 border-lime rounded-4xl p-5 ml-5'>
+          <form onSubmit={handleSubmit} className='m-auto p-6 text-lead '>
+            <div className='grid grid-cols-[8em_1fr]'>
+              <label className='font-bold mt-5'>Name</label>
+              <input
+                name='name'
+                type='text'
+                onChange={handleChange}
+                className='input-style bg-lime-50/50 w-75'
+              />
 
-            <label className="font-bold mt-5">Username</label>
-            <input
-              name='username'
-              type='text'
-              minlength='6'
-              onChange={handleChange}
-              className="input-style w-75 bg-lime-50/50"
-/>
+              <label className='font-bold mt-5'>Username</label>
+              <input
+                name='username'
+                type='text'
+                minlength='6'
+                onChange={handleChange}
+                className='input-style w-75 bg-lime-50/50'
+              />
 
-            <label className="font-bold mt-5">Email</label>
-            <input
-              name='email'
-              type='text'
-              pattern='[^@\s]+@[^@\s]+\.[^@\s]+'
-              onChange={handleChange}
-              className="input-style w-75 bg-lime-50/50"
+              <label className='font-bold mt-5'>Email</label>
+              <input
+                name='email'
+                type='text'
+                pattern='[^@\s]+@[^@\s]+\.[^@\s]+'
+                onChange={handleChange}
+                className='input-style w-75 bg-lime-50/50'
+              />
 
-/>
+              <label className='font-bold mt-5'>Password</label>
+              <input
+                name='password'
+                type='password'
+                minLength='8'
+                onChange={handleChange}
+                className='input-style w-75 bg-lime-50/50'
+              />
+            </div>
 
-            <label className="font-bold mt-5">Password</label>
-            <input
-              name='password'
-              type='password'
-              minLength='8'
-              onChange={handleChange}
-             className="input-style w-75 bg-lime-50/50"
-
- />
-          </div>
-
-          <button className='button-style flex m-auto mt-5 justify-center w-50' type-='submit'>
-            Register
-          </button>
-        </form>
-      </div>
+            <button
+              className='button-style flex m-auto mt-5 justify-center w-50'
+              type-='submit'
+            >
+              Register
+            </button>
+          </form>
+        </div>
       </div>
     </>
   );

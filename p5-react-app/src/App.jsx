@@ -10,13 +10,13 @@ import { NotFound } from "../../../activities/06-react/07-app/src/pages/NotFound
 import { NavBar } from "./components/NavBar";
 import { EditActivity } from "./components/EditActivity";
 import { RaceList } from "./components/RaceList";
-import { RacePage } from "./pages/RacePage";
-import { Charts } from "./components/Charts";
 import { RaceRegistration } from "./components/RaceRegistration";
 
 function App() {
   return (
     <>
+      <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+
       <NavBar />
       <Routes>
         <Route path='/'>
@@ -36,12 +36,12 @@ function App() {
           </Route>
 
           <Route path='/races'>
-            <Route index element={<RacePage />} />
+            <Route index element={<RaceList />} />
             <Route path='list' element={<RaceList />} />
             <Route path='register/:id' element={<RaceRegistration />} />
           </Route>
-
         </Route>
+
         <Route path='*' element={<NotFound />} />
       </Routes>
       <ToastContainer />

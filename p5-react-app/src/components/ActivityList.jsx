@@ -55,27 +55,31 @@ export const ActivityList = () => {
             <div className='border-1 border-lime rounded-2xl p-4 pl-10 m-5'>
               <div className='heading-style'>{activity.activityName}</div>
               <div>
-
-              <div className='bg-lime w-20 text-center my-1'>
-                {getActivityLabel(activity.activityType)}
-              </div>
-              <div>{new Date(activity.date).toLocaleDateString("en-US", {
-                  month: "long",
-                  day: "2-digit",
-                  year: "numeric",
-                })}</div>
-              <div><b>Distance: </b>{activity.distance} kms</div>
-              <div>{activity.gear}</div>
-              <div>{activity.elevGain}</div>
-              <div className='w-6/7 h-100 my-3 overflow-hidden rounded-lg'>
-                {activity.files?.map((file) => (
-                  <img
-                    key={file._id}
-                    src={file.url}
-                    alt='activity'
-                    className='w-full h-full object-cover'
-                  />
-                ))}
+                <div className='bg-lime w-20 text-center my-1'>
+                  {getActivityLabel(activity.activityType)}
+                </div>
+                <div>
+                  {new Date(activity.date).toLocaleDateString("en-US", {
+                    month: "long",
+                    day: "2-digit",
+                    year: "numeric",
+                  })}
+                </div>
+                <div>
+                  <b>Distance: </b>
+                  {activity.distance} kms
+                </div>
+                <div>{activity.gear}</div>
+                <div>{activity.elevGain}</div>
+                <div className='w-6/7 h-100 my-3 overflow-hidden rounded-lg'>
+                  {activity.files?.map((file) => (
+                    <img
+                      key={file._id}
+                      src={file.url}
+                      alt='activity'
+                      className='w-full h-full object-cover'
+                    />
+                  ))}
                 </div>
               </div>
 

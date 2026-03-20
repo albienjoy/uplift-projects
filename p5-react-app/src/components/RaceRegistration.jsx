@@ -56,7 +56,6 @@ export const RaceRegistration = () => {
 
       if (response.ok) {
         notifySuccess();
-        console.log("Success!");
         console.log(data);
       }
     } catch (error) {
@@ -74,13 +73,15 @@ export const RaceRegistration = () => {
 
   return (
     <>
-      <div className='grid grid-cols-2 gap-6 p-5 border-2 border-lime rounded-2xl m-5'>
+      <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+
+      <div className='gap-6 p-5 border-2 border-lime rounded-2xl m-5'>
         <img
           src={marathonimg}
-          className='w-full h-200 object-cover rounded-xl'
+          className='w-full h-1/3 object-cover rounded-xl'
         />
-        <div className='flex flex-col gap-2 text-md px-6'>
-          <div className='font-bold text-2xl bg-lead rounded-2xl text-lime p-4'>
+        <div className='flex flex-col gap-2 text-md px-6 sm:text-sm'>
+          <div className='font-bold text-2xl text-darkviolet p-4 sm:text-sm'>
             {data.marathon.name.en}
           </div>
           <div>
@@ -108,13 +109,10 @@ export const RaceRegistration = () => {
       </div>
 
       <div className='border-2 border-lightviolet p-5 rounded-2xl m-5'>
-        <h1 className='font-bold text-2xl bg-lead rounded-2xl text-lightviolet p-4'>
+        <h1 className='font-bold text-2xl text-darkviolet p-4 sm:text-sm'>
           Registration
         </h1>
-        <form
-          onSubmit={handleSubmit}
-          className='grid grid-cols-2 text-md px-10 m-5'
-        >
+        <form onSubmit={handleSubmit} className='grid grid-cols-2 text-md'>
           <label className='m-5'>Name: </label>
           <input
             name='name'
@@ -131,11 +129,11 @@ export const RaceRegistration = () => {
             selected={birthday}
             onChange={(birthday) => setBirthday(birthday)}
             required
-            className='input-style'
+            className='input-style w-6/7'
             portalId='react-datepicker-portal'
           />
 
-          <label className='m-5'>Sex (M/F): </label>
+          <label className='m-5'>Sex (Male/Female): </label>
           <input
             name='sex'
             placeholder='Male/Female'
@@ -207,7 +205,7 @@ export const RaceRegistration = () => {
             className='input-style'
           />
           <div className='col-span-2 m-auto'>
-            <button type='submit' className='button-style w-100 m-5'>
+            <button type='submit' className='button-style m-5'>
               Register
             </button>
           </div>

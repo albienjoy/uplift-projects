@@ -73,7 +73,6 @@ export const EditActivity = () => {
       if (response.ok) {
         navigate(`/profile`);
         notifySuccess();
-        console.log("success!");
       }
     } catch (error) {
       console.log("error", error);
@@ -93,7 +92,6 @@ export const EditActivity = () => {
 
         const result = await response.json();
         setData(result);
-        console.log(typeof result);
       } catch (error) {
         setError("Error loading data");
       }
@@ -107,22 +105,24 @@ export const EditActivity = () => {
 
   return (
     <>
-      <h1> Edit activity </h1>
-      <form onSubmit={handleSubmit}>
-        <label>Activity name:</label>
+      <h1 className='heading-style m-5 pl-5'> Edit activity </h1>
+      <form onSubmit={handleSubmit} className='px-10 grid grid-cols-[1/3_1/3]'>
+        <label className='font-bold text-md'>Activity name:</label>
         <input
           name='activityName'
           placeholder='Activity name'
           onChange={handleChange}
           defaultValue={data.activityName}
+          className='input-style bg-lime-50/50 w-2/3'
         />
 
-        <label>Activity type:</label>
+        <label className='font-bold text-md'>Activity type:</label>
         <select
           name='activityType'
           value={formData.activityType}
           onChange={handleChange}
           defaultValue={getActivityLabel(data.activityType)}
+          className='input-style bg-lime-50/50 w-2/3'
         >
           <option value=''>Select activity</option>
           {activityTypeOptions.map((option) => (
@@ -132,41 +132,52 @@ export const EditActivity = () => {
           ))}
         </select>
 
-        <label>Date:</label>
+        <label className='font-bold text-md'>Date:</label>
         <input
           name='date'
           placeholder='Date'
           onChange={handleChange}
           defaultValue={data.date}
+          className='input-style bg-lime-50/50 w-2/3'
         />
 
-        <label>Distance:</label>
+        <label className='font-bold text-md'>Distance:</label>
         <input
           name='distance'
           placeholder='Distance'
           onChange={handleChange}
           defaultValue={data.activityType}
+          className='input-style bg-lime-50/50 w-2/3'
         />
 
-        <label>Total time:</label>
+        <label className='font-bold text-md'>Total time:</label>
         <input
           name='totalTime'
           placeholder='Total time'
           onChange={handleChange}
           defaultValue={data.totalTime}
+          className='input-style bg-lime-50/50 w-2/3'
         />
 
-        <label>Description:</label>
+        <label className='font-bold text-md'>Description:</label>
         <textarea
           name='description'
           onChange={handleChange}
           defaultValue={data.description}
+          className='input-style bg-lime-50/50 w-2/3'
         />
 
-        <label>Upload photos:</label>
-        <input type='file' multiple onChange={handleFileChange} />
+        <label className='font-bold text-md'>Upload photos:</label>
+        <input
+          type='file'
+          multiple
+          onChange={handleFileChange}
+          className='ml-3 p-5 bg-lime rounded-2xl shadow-inner w-2/3'
+        />
 
-        <button type='submit'>Update</button>
+        <button type='submit' className='button-style my-5'>
+          Update
+        </button>
 
         <hr />
       </form>
