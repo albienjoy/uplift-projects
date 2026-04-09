@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import "tailwindcss";
+
+@theme {
+    --color-purple: #9a94de;
+    --color-darkviolet: #311e4e;
+    --color-lightviolet:#C4C0E8;
+    --color-lime: #CEE182;
+    --color-silver: #f6f6f7;
+    --color-darksilver: #737274;
+    --color-lead: #202020;
+    --font-inter: "Inter";
+    --font-quantico: "Quantico";
+}
+
+@utility button-style {
+    @apply bg-lightviolet w-25 p-2 m-1 shadow-inner rounded-xl text-amber-50 hover:bg-lime text-lead
+}
+
+@utility input-style {
+    @apply m-2 rounded-2xl border-2 border-lightviolet p-2
+}
+
+@utility heading-style {
+    @apply font-quantico font-bold text-2xl text-darkviolet
+}
+
+@utility subheading-style {
+    @apply font-quantico font-bold text-xl 
+}
+
+#react-datepicker-portal {
+  z-index: 1000 !important;
+}
+
