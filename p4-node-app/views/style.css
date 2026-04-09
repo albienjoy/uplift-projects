@@ -1,0 +1,181 @@
+html {
+  background-color: #fafbf9;
+  font-family: TikTok Sans;
+  text-align: center;
+  width: 100%;
+  background-image: url("blue\ cable\ knit.png");
+}
+
+body {
+  margin: 0;
+  padding: 0
+}
+
+
+header {
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  background: #212f6f;
+  width: 100%;
+  height: 70px;
+  color: #fafbf9;
+}
+
+
+button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2em;
+  background: #fbd708;
+  color: #212f6f;
+  padding: 10px;
+  width: 100px;
+  border-radius: 50px;
+}
+
+button:hover {
+  transform: translateY(2px)
+}
+
+#donation-form {
+  position: relative;
+  width: 500px;
+  height: 1000px;
+}
+
+
+#list-heading {
+  display: flex;
+}
+
+.hidden {
+  display: none;
+}
+
+h2 {
+  font-size: 1.5em;
+  font-family: Texturina;
+  color: #fafbf9
+}
+
+h3 {
+    font-size: 1em;
+    color: #fafbf9;
+}
+
+a {
+  color: #fafbf9;
+  text-decoration: none;
+}
+
+#home-anchor {
+    display: block;
+
+    color: whitesmoke
+}
+
+#logo {
+  height: 7em;
+  transition: transform 0.3s ease-in-out, 
+}
+
+#logo:hover {
+  transform: translateY(3px);
+}
+
+#img-container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.intro-copy {
+    position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: black;
+  font-size: 1.2em;
+}
+
+#cardboard-img {
+  height: 30em;
+  width: 70%;
+}
+
+#home-text {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 15em;
+  margin-top: -1em;
+}
+
+.split-text-container {
+    display: flex;
+    font-size: 5rem;
+    font-weight: bold;
+    color: #fafbf9;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: .5em;
+    
+}
+
+.text-part {
+    display: inline-block;
+    position: relative;
+    transform: translateX(0);
+    animation-duration: 2s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+.text-part.left {
+    transform: translateX(-199%);
+    animation-name: slide-in-left;
+    font-family: Texturina;
+}
+
+.text-part.right {
+    transform: translateX(199%);
+    animation-name: slide-in-right;
+        font-family: Texturina;
+        color: #d1a51b
+}
+
+@keyframes slide-in-left {
+    0% {
+        transform: translateX(-199%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-in-right {
+    0% {
+        transform: translateX(199%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #212f6f;;
+  color: white;
+  text-align: center;
+  padding-bottom: 1em;
+}
+
+section {
+  color: #fafbf9;
+}
