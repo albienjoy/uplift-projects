@@ -18,7 +18,7 @@ class App {
       { weapon: "Bow and arrows", clothing: "Long skirt" },
       { weapon: "Small knife", clothing: "Riding boots" },
     ];
-    this.treasureItemsDuplicate = [...this.treasureItems];
+    this.treasureItemsDuplicate = [...this.treasureItems]; 
   }
 
   mainPage() {
@@ -56,23 +56,24 @@ Uplift Batch 28 - M♡mentum
           rl.close();
           break;
 
-        case "3":
+                case "3":
           console.clear();
           this.luckCheck();
           break;
 
-        case "4":
+                  case "4":
           console.clear();
           this.giveMorePage();
           break;
-        case "5":
+                  case "5":
           console.clear();
           this.womanRequestPage();
           break;
-        case "6":
+                  case "6":
           console.clear();
           this.itemCheckPage();
           break;
+
 
         default:
           console.clear();
@@ -94,16 +95,16 @@ Give a number from 5-10.
     console.log(page);
 
     rl.question("Give a number: ", (max) => {
-      if (max <= 10 && max >= 5) {
-        let luckCheck = getRandomNumber(1, max); //calls the fxn i made at the top
-        console.log(`
+        if (max <= 10 && max >= 5){
+      let luckCheck = getRandomNumber(1, max); //calls the fxn i made at the top
+      console.log(`
 You rolled a ${luckCheck}! 
             `);
-      } else {
+                    }else{
         console.clear();
         console.log("⚠️ Choose a number from 5-10 only.");
         this.luckCheck();
-      }
+        }
 
       console.log(`
 [1] Start my adventure      [2] Try again!       [3] Back to the main page
@@ -128,7 +129,7 @@ You rolled a ${luckCheck}!
             this.luckCheck();
             break;
 
-          case "3":
+                      case "3":
             console.clear();
             this.mainPage();
             break;
@@ -278,13 +279,13 @@ something good will happen to you."
     });
   }
 
-  womanRequestPage() {
+  womanRequestPage() { 
     const page = `
 
 She shows you what she already has below.
 You look at your rucksack and see that you are fully armed:
 swords, shields, helmets, and many more.
-`;
+`
     console.log(page);
     console.table(this.treasureItems);
 
@@ -427,7 +428,9 @@ Or else.
       rl.question("Give an item of clothing: ", (clothing) => {
         console.log("");
 
-        console.log("[1] Toss it to them.  [2] Escape this. Start over!");
+        console.log(
+          "[1] Toss it to them.  [2] Escape this. Start over!"
+        );
         console.log("");
 
         rl.question("Choose action: ", (answer) => {
@@ -463,13 +466,13 @@ Or else.
   consequence2Page() {
     const page = `
     
-The women look at their updated inventory. They are satisfied.`;
+The women look at their updated inventory. They are satisfied.`
 
     console.log(page);
 
     console.table(this.treasureItems);
 
-    console.log(`
+console.log(`
 
 But one growls at you: "Why were you so selfish to our sister?" 
 She steps towards you and pokes your heart. 
@@ -477,6 +480,7 @@ She steps towards you and pokes your heart.
 [1] See what happens next.      [2] Don't risk it. Start over.
 
 `);
+
 
     rl.question("Choose action: ", (answer) => {
       switch (answer) {
@@ -685,7 +689,9 @@ Or else.
       rl.question("Give a piece of clothing: ", (clothing) => {
         console.log("");
 
-        console.log("[1] Give it to them.  [2] Escape this. Start over!");
+        console.log(
+          "[1] Give it to them.  [2] Escape this. Start over!"
+        );
         console.log("");
 
         rl.question("Choose action: ", (answer) => {
@@ -759,7 +765,7 @@ You stole from her and got the following!`;
 
     console.log(page);
 
-    console.table(this.treasureItemsDuplicate.pop());
+console.table(this.treasureItemsDuplicate.pop());
 
     console.log(`
 The woman screams and starts chanting.
@@ -979,5 +985,5 @@ Enter the weapon and clothing you want to give.
   }
 }
 
-const myApp = new App("The First Language");
+const myApp = new App("The First Language"); 
 myApp.run();
