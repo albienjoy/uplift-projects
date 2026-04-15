@@ -6,7 +6,7 @@ import { Home } from "./pages/Home";
 import { Dashboard } from "./pages/Dashboard";
 import { ActivityDetails } from "./pages/ActivityDetails";
 import { ActivityUpload } from "./pages/ActivityUpload";
-import { NotFound } from "../../../activities/06-react/07-app/src/pages/NotFound";
+import { NotFound } from "./pages/NotFound";
 import { NavBar } from "./components/NavBar";
 import { EditActivity } from "./components/EditActivity";
 import { RaceList } from "./components/RaceList";
