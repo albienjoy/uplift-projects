@@ -10,7 +10,7 @@ import {
 import { useFetch } from "../hooks/useFetch";
 
 export const Charts = () => {
-  const { data, loading, error } = useFetch("http://localhost:9876/api/post");
+  const { data, loading, error } = useFetch(import.meta.env.VITE_API_URL + "/api/post");
 
   if (loading) {
     return <div>Loading data</div>;

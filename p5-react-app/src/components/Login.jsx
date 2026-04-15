@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 
 export const Login = () => {
   const notifySuccess = () => toast.success("Logged in successfully!");
-  const loginEndpoint = "http://localhost:9876/api/auth/login";
+  const loginEndpoint = import.meta.env.VITE_API_URL + "/api/auth/login";
   const [formData, setFormData] = useState({
     username: "",
     password: "",

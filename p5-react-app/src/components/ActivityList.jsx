@@ -4,7 +4,7 @@ import { activityTypeOptions } from "../constants/activityTypes";
 import { useState, useEffect } from "react";
 
 export const ActivityList = () => {
-  const { data, loading, error } = useFetch("http://localhost:9876/api/post");
+  const { data, loading, error } = useFetch(import.meta.env.VITE_API_URL + "/api/post");
   const [activities, setActivities] = useState([]);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export const ActivityList = () => {
     if (!confirmed) return;
 
     try {
-      const response = await fetch("http://localhost:9876/api/post/" + id, {
+      const response = await fetch(import.meta.env.VITE_API_URL + "/api/post/" + id, {
         method: "DELETE",
         credentials: "include",
       });

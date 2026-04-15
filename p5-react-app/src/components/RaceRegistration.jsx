@@ -10,10 +10,10 @@ export const RaceRegistration = () => {
   const notifySuccess = () => toast.success("Successfully registered!");
   const { id } = useParams();
   const { data, loading, error } = useFetch(
-    "http://localhost:9876/api/race" + "/" + id,
+    import.meta.env.VITE_API_URL + "/api/race" + "/" + id,
   );
 
-  const registrationEndpoint = "http://localhost:9876/api/race/register";
+  const registrationEndpoint = import.meta.env.VITE_API_URL + "/api/race/register";
 
   const [formData, setFormData] = useState({
     name: "",

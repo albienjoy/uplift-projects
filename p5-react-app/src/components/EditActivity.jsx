@@ -10,7 +10,7 @@ export const EditActivity = () => {
   const [files, setFiles] = useState([]);
   const navigate = useNavigate();
 
-  const endpoint = "http://localhost:9876/api/post/" + id;
+  const endpoint = import.meta.env.VITE_API_URL + "/api/post/" + id;
 
   const activityTypeOptions = [
     { value: "walk", label: "Walk" },

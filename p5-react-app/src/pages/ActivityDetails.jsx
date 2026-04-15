@@ -10,7 +10,7 @@ export const ActivityDetails = () => {
     return option ? option.label : value;
   };
 
-  const { data, error } = useFetch("http://localhost:9876/api/post/" + id);
+  const { data, error } = useFetch(import.meta.env.VITE_API_URL + "/api/post/" + id);
   if (error) return <div>{error}</div>;
   if (!data) return <div>Loading...</div>;
 

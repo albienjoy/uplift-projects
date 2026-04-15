@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import { useEffect, useState } from "react";
 
 export const RaceList = () => {
-  const listEndpoint = "http://localhost:9876/api/race";
+  const listEndpoint = import.meta.env.VITE_API_URL + "/api/race";
 
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);

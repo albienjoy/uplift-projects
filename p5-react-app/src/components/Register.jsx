@@ -12,7 +12,7 @@ export const Register = () => {
 
   const navigate = useNavigate();
 
-  const registerEndpoint = "http://localhost:9876/api/auth/register";
+  const registerEndpoint = import.meta.env.VITE_API_URL + "/api/auth/register";
 
   const handleChange = (event) => {
     setFormData({

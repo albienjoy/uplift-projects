@@ -14,7 +14,7 @@ export const AuthProvider = ({children}) => {
 
     const checkSession = async () => {
         try{
-            const response = await fetch("http://localhost:9876/api/auth/session", {
+            const response = await fetch(import.meta.env.VITE_API_URL + "/api/auth/session", {
                 method: "GET",
                 credentials: "include",
                 headers: {

@@ -2,7 +2,7 @@ import { useNavigate } from "react-router";
 import logoutIcon from "../assets/logout.png";
 
 export const Logout = () => {
-  const logoutEndpoint = "http://localhost:9876/api/auth/logout";
+  const logoutEndpoint = import.meta.env.VITE_API_URL + "/api/auth/logout";
   const navigate = useNavigate();
 
   const handleLogout = async () => {

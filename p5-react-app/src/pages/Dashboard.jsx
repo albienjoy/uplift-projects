@@ -6,10 +6,7 @@ import { useFetch } from "../hooks/useFetch";
 
 export const Dashboard = () => {
   const { user } = useAuth();
-  const { data, loading, error } = useFetch("http://localhost:9876/api/post");
-  if (!user) {
-    return <div>You don't have enough access. Please log in</div>;
-  }
+  const { data, loading, error } = useFetch(import.meta.env.VITE_API_URL + "/api/post");
 
   if (loading) {
     return <div>Loading data</div>;

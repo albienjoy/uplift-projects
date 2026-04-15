@@ -7,7 +7,7 @@ import background from "../assets/register.png";
 
 export const AddActivity = () => {
   const notifySuccess = () => toast.success("Activity uploaded successfully!");
-  const uploadEndpoint = "http://localhost:9876/api/post";
+  const uploadEndpoint = import.meta.env.VITE_API_URL + "/api/post";
   const [date, setDate] = useState(new Date());
 
   const activityTypeOptions = [
