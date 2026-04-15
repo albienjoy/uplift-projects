@@ -35,9 +35,11 @@ app.use(
     })
 );
 
+app.get("/", (req,res) => {
+    res.end("Hello world")
+});
 app.use("/api", userRoutes);
 app.use("/api", donationRoutes);
 app.use("/api", addressRoutes);
-
 
 app.listen(PORT, () => {console.log(`App is running at http://localhost:${PORT}`)});
