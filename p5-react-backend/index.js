@@ -14,10 +14,11 @@ dotEnv.config();
 
 const PORT = process.env.PORT || 3000;
 const app = express();
+const frontend = process.env.FRONTEND || 'http://localhost:5173';
 
 const corsOptions = {
     origin: function (origin, callback) {
-    const allowedOrigins = ['http://localhost:5173'];
+    const allowedOrigins =  [frontend];
 
 if (!origin) return callback(null, true);
 
