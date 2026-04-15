@@ -11,6 +11,12 @@ import userRoutes from "./routes/userRoutes.js";
 import donationRoutes from "./routes/donationRoutes.js";
 import addressRoutes from "./routes/addressRoutes.js"
 
+import path from "node:path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 dotEnv.config();
 connectDB();
 const PORT = process.env.PORT || 3000;
@@ -35,8 +41,9 @@ app.use(
     })
 );
 
-app.get("/", (req,res) => {
-    res.end("Hello world")
+app.use(express.static(path.join(__dirname, "views")));
+app.get("/", (req, res) => {
+res.sendFile(path.join(__dirname, "views", "index.html"));
 });
 app.use("/api", userRoutes);
 app.use("/api", donationRoutes);
