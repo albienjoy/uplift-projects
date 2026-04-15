@@ -67,14 +67,13 @@ const usernameHeader = document.querySelector("#username-container");
 
 homeSection.classList.remove("hidden");
 
-//ENDPOINTS
-const registerEndpoint = "http://localhost:5555/api/register";
-const loginEndpoint = "http://localhost:5555/api/login";
-const logoutEndpoint = "http://localhost:5555/api/logout";
-const donationEndpoint = "http://localhost:5555/api/donation";
-const addressEndpoint = "http://localhost:5555/api/address";
-const listDonationEndpoint = "http://localhost:5555/api/donation";
-
+//ENDPOINTS -- 
+const registerEndpoint = "/api/register";
+const loginEndpoint = "/api/login";
+const logoutEndpoint = "/api/logout";
+const donationEndpoint = "/api/donation";
+const addressEndpoint = "/api/address";
+const listDonationEndpoint = "/api/donation";
 
 let isLoggedIn = false;
 
