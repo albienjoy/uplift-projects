@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap');
+@import "tailwindcss";
+
+
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+} */
+
+@theme {
+    --color-iceblue: #99c5ff;
+    --color-goldyellow: #febc20;
+    --color-dandelion: #ffeb99;
+    --color-darkpink: #e67b7b;
+    --color-lightpink: #fbe0d6;
+    --font-archivo: "Archivo Black", sans-serif;
+}
+
+@utility navbar-links {
+    @apply block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:border-gray-700
+}
+
+@utility header {
+    @apply lg:text-6xl font-bold m-5 px-12 sm:text-3xl
+}
+
+@utility skill-text {
+    @apply text-2xl flex p-6 gap-1.5 
+}
+
+@utility project-card {
+    @apply h-1/4 bg-amber-300
+}
+
+@utility project-title {
+    @apply text-3xl font-bold
+}
+
+.about-me {
+    background: url("./assets/white-grid.png");
+    overflow: hidden;
+}
+
+.skills {
+    background-color: whitesmoke;
+}
+
+.skill-title {
+    background: url("./assets/bluestripe.png");
+    height: 20em;
+    display: flex;
+    align-items: center;
+}
+
+.svg-path {
+    position: absolute;
+    top: 25svh;
+    left: 50%; 
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}

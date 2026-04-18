@@ -1,51 +1,6 @@
 import {Link} from "react-router";
 
 export const LandingPage = () => {
-    const projects = [
-  {
-    name: "Project One",
-    image: "https://via.placeholder.com/300",
-    repo: "https://github.com/albienjoy/project-one",
-    live: "https://project-one-demo.com",
-  },
-  {
-    name: "Project Two",
-    image: "https://via.placeholder.com/300",
-    repo: "https://github.com/albienjoy/project-two",
-    live: "https://project-two-demo.com",
-  },
-  {
-    name: "Project Three",
-    image: "https://via.placeholder.com/300",
-    repo: "https://github.com/albienjoy/project-three",
-    live: "https://project-three-demo.com",
-  },
-  {
-    name: "Project Four",
-    image: "https://via.placeholder.com/300",
-    repo: "https://github.com/albienjoy/project-four",
-    live: "https://project-four-demo.com",
-  },
-  {
-    name: "Project Five",
-    image: "https://via.placeholder.com/300",
-    repo: "https://github.com/albienjoy/project-five",
-    live: "https://project-five-demo.com",
-  },
-];
-
-const skills = [
-  { name: "MERN Stack", icon: "https://via.placeholder.com/50" },
-  { name: "JavaScript", icon: "https://via.placeholder.com/50" },
-  { name: "Unit Testing", icon: "https://via.placeholder.com/50" },
-  { name: "Debugging", icon: "https://via.placeholder.com/50" },
-  { name: "TypeScript (Basic)", icon: "https://via.placeholder.com/50" },
-  { name: "Leadership", icon: "https://via.placeholder.com/50" },
-  { name: "Communication", icon: "https://via.placeholder.com/50" },
-  { name: "Coaching", icon: "https://via.placeholder.com/50" },
-  { name: "Writing", icon: "https://via.placeholder.com/50" },
-  { name: "Research", icon: "https://via.placeholder.com/50" },
-];
 
     return (
         <>
