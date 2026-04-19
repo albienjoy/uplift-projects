@@ -555,7 +555,7 @@ function renderLeaderboard(leaderboardList) {
     <span class="rank">${index + 1}</span>
     <span class="username">${entry.username}</span>
     <span class="score">${entry.score}</span>`;
-
+ 
     leaderboardList.appendChild(li);
   });
 }
