@@ -11,7 +11,7 @@ I can click a link to send an email to your email address.
 I can click a link to visit your GitHub or Gitlab page.
 I can click a link to visit your LinkedIn page.
  */
-
+import keysprint from "../assets/keysprint.gif"
 
 export const ProjectSection = () => {
         //links
@@ -25,7 +25,7 @@ export const ProjectSection = () => {
         <>
         <section id="projects">
             <h1 className="header">Projects</h1>
-            <div className="grid grid-cols-2 gap-3 m-8">
+            <div className="grid grid-cols-1 m-8 gap-8">
             <div className="project-card">
                 <h1 className="project-title">The First Language</h1>
                 <p>This is a command line choose-your-own-adventure game that promotes reading and stimulates imagination!</p>
@@ -33,8 +33,9 @@ export const ProjectSection = () => {
                 <a>Link</a>
             </div>
 
-            <div>
+            <div className="project-card">
                 <h1>Key Sprint</h1>
+                <img src={keysprint} />
                 <p>This is a typing game featuring vanilla Javascript </p>
                 <a href={keySprintLink} target="_blank" rel="noopener noreferrer">Live</a>
             </div>

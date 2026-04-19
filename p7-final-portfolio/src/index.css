@@ -22,15 +22,19 @@
 }
 
 @utility header {
-    @apply lg:text-6xl font-bold m-5 px-12 sm:text-3xl
+    @apply text-4xl font-bold m-5 px-12 md:text-5xl lg:text-6xl
 }
 
 @utility skill-text {
     @apply text-2xl flex p-6 gap-1.5 
 }
 
+@utility skill-items {
+    @apply grid place-items-center gap-3.5
+}
+
 @utility project-card {
-    @apply h-1/4 bg-amber-300
+    @apply bg-slate-200/50 rounded-2xl p-6
 }
 
 @utility project-title {
@@ -43,7 +47,7 @@
 }
 
 .skills {
-    background-color: whitesmoke;
+    background-color: #f0f9e9;
 }
 
 .skill-title {
